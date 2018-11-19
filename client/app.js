@@ -5,11 +5,12 @@ import Routes from './routes'
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Routes />
-    </div>
-  )
+    <Switch>
+          <Redirect exact path='/' to='/landingPage' />
+          <Route exact path ='/landingPage' component={LandingPage} />
+          <Route component={Routes} />
+    </Switch>
+)
 }
 
 export default App
