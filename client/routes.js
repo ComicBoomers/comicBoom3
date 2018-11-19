@@ -2,8 +2,13 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, Signup} from './components'
 import {me} from './store'
+//Import Main Components Here
+import Navbar from './components/Navbar'
+import { UserHome } from './components/user-home'
+import AddVideo from './components/AddVideo'
+import PageCreate from './components/PageCreate'
 
 /**
  * COMPONENT
@@ -17,19 +22,27 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Switch>
+
+      <div>
+        <Navbar />
+
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/confirmation" component={Confirmation} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/addVideo" component={AddVideo} />
+            <Route exact path="/pageCreate" component={PageCreate} />
+            {/* BELOW NEED TO BE AVAIL ADMIN ONLY... */}
+
           </Switch>
         )}
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch>
+
+      </div>
     )
   }
 }
