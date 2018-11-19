@@ -9,6 +9,8 @@ import Navbar from './components/Navbar'
 import { UserHome } from './components/user-home'
 import AddVideo from './components/AddVideo'
 import PageCreate from './components/PageCreate'
+import SelectClips from './components/SelectClips'
+import SinglePage from './components/SinglePage';
 
 /**
  * COMPONENT
@@ -29,14 +31,17 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/confirmation" component={Confirmation} />
+        {/* <Route path="/confirmation" component={Confirmation} /> */}
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
-            <Route exact path="/addVideo" component={AddVideo} />
-            <Route exact path="/pageCreate" component={PageCreate} />
+            <Route exact path="/uploadVideo" component={AddVideo} />
+            <Route exact path="/createComic" component={PageCreate} />
+            <Route exact path='/selectClips' component={SelectClips}/>
+            <Route path='/comicPage'
+            component = {SinglePage}/>
             {/* BELOW NEED TO BE AVAIL ADMIN ONLY... */}
 
           </Switch>
