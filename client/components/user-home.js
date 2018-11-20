@@ -8,14 +8,16 @@ import {me} from '../store'
  * COMPONENT
  */
 class UserHome extends Component {
-// componentDidMount() {
-//   this.props.loadInitialData()
-// }
+componentDidMount() {
+  this.props.loadInitialData()
+}
 render(){
   const email = this.props.user.email
   console.log('My props', this.props)
   return (
     <div>
+        {this.props.user.pages &&
+        <div>
     <div>
       <h3>Welcome, {email}</h3>
       <Link to='/uploadVideo'>
@@ -23,18 +25,25 @@ render(){
       <img src ='https://www.inmotionnow.com/wp-content/uploads/2017/03/New-to-inMotion-Reviewer-Markup-Sharing-Options-and-Forwarding-from-Review-Interface.png' className ='addNewButton' /></button>
       </Link>
     </div>
-    <div>
-    <h2>My Comics</h2>
-    <Link to='/comicPage'>
-    <p>PLACEHOLDER</p>
-    </Link>
- <img src={this.props.user.pages[0].location} className='homePageImage'/>
-    <p>PLACEHOLDER</p>
-    <p>PLACEHOLDER</p>
+  <div>
+  <h2>My Comics</h2>{
+    this.props.user.pages.map(photo =>{
+      return (
+        <div key = {photo.id}>
+           <Link to={{pathname: `/comicPage/${photo.id}`, state: photo.location}}>
+  <img src={photo.location} className='homePageImage'/>
+  </Link>
+        </div>
+      )
+    })
+
+  }
+  </div>
+  </div>
+        }
     </div>
-    </div>
-  )
-}
+   )
+  }
 }
 
 /**
