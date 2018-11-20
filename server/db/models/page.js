@@ -6,10 +6,6 @@ const Page = db.define('page', {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
-  },
-  UID: {
-    type: Sequelize.INTEGER,
-    allowNull: false
   }
 
 })
