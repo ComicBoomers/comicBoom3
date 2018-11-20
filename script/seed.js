@@ -4,20 +4,7 @@ const db = require('../server/db')
 const { User, Page } = require('../server/db/models')
 const { green, red } = require('chalk')
 
-const pages = [{
-  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2F14203273_10102140056247297_3117888548750496357_n.jpg?alt=media&token=d6fcabce-0f6b-4ce4-8ec2-8b28e40e03e2',
-  userId: 1,
-}, {
-  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fangel-art-artistic-187069.jpg?alt=media&token=47a0ce08-f113-4724-bf68-8665fd74a390',
-  userId: 2,
-}, {
-  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21',
-  userId: 1,
-}, {
-  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fart-beautiful-cartoonize-278663.jpg?alt=media&token=1984c155-f956-4d31-b7af-68907244efe6',
-  userId: 3,
-}
-]
+
 
 //UserType?? Do we need this?
 const users = [{
@@ -59,11 +46,25 @@ const users = [{
 }
 ]
 
+const pages = [{
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2F14203273_10102140056247297_3117888548750496357_n.jpg?alt=media&token=d6fcabce-0f6b-4ce4-8ec2-8b28e40e03e2',
+  userId: 1,
+}, {
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fangel-art-artistic-187069.jpg?alt=media&token=47a0ce08-f113-4724-bf68-8665fd74a390',
+  userId: 2,
+}, {
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21',
+  userId: 1,
+}, {
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fart-beautiful-cartoonize-278663.jpg?alt=media&token=1984c155-f956-4d31-b7af-68907244efe6',
+  userId: 3,
+}]
+
 const seed = () =>
-  Promise.all(pages.map(elem => Page.create(elem))
+  Promise.all(users.map(elem => User.create(elem))
   )
     .then(() =>
-      Promise.all(users.map(elem => User.create(elem))
+      Promise.all(pages.map(elem => Page.create(elem))
       )
     )
 
