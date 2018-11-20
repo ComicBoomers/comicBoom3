@@ -1,43 +1,44 @@
 import interact from 'interactjs'
+import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 
-// interact('.item').draggable({
-//   onmove(event) {
-//     console.log(event.pageX,
-//                 event.pageY)
-//   }
-// })
-
-/// className = 'dropzone' needs to be on current rendered gif page
 class Stickers extends React.Component {
 
   constructor() {
     super()
     this.state = {
-      stickers: []
+      stickers: [],
+      id: null
     }
+
+    this.dragStart=this.dragStart.bind(this)
   }
 
   componentDidMount() {
-    //get stickers location from database
-    //get stickers from storage
+    //get stickers from storage in an array if possible
     //put on state
+  }
+
+  dragStart(e) {
+    const id = e.target.id
+    this.setState({id})
   }
 
   render() {
   const stickerArr = this.state.stickers
 
+  //sticker.url below is a guess so be sure to check what that object being returned from storage really looks like
   return (
-    <div id='stickerList'>
+    <div class='drag-zone' id='stickerList'>
       <ul>
         <label>STICKERS</label>
         {
-          stickersArr.map(sticker => {
+          stickerArr.map(sticker => {
             return (
-              <li className='drag-drop' ></li>
-              //data={draggable:true, url:'stickerURL'} inside li?
+              <li id={sticker.id} ondragstart={this.dragStart(event)}><img src={sticker.url} /></li>
+
             )
           })
         }
@@ -46,3 +47,5 @@ class Stickers extends React.Component {
   )
       }
 }
+
+export default Stickers
