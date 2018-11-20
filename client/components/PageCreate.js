@@ -1,6 +1,7 @@
 import React from 'react'
+
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Stickers from './Stickers'
 
 
@@ -43,7 +44,9 @@ class PageCreate extends React.Component {
         }
         </div>
         <div>
+       <Link to='/home'>
           <button onClick={savePage}>SAVE</button>
+   </Link>
         </div>
       </div>
     )

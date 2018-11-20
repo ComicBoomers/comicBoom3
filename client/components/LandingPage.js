@@ -6,8 +6,7 @@ const LandingPage = () => {
   return (
     <div id='landingPage' >
 
-    <p> Comic </p> <img src = {logo} className= "App-logo" alt= "logo"/>
-
+    <p> Comic </p>
       <div id='landingLink'>
       <button align='center' id='landingLink'><NavLink id='landingLink' to='/login' >Login</NavLink></button>
       <button align='center' id='landingLink'><NavLink id='landingLink' to='/signup' >Sign Up</NavLink></button>
