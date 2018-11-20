@@ -23,7 +23,8 @@ class PageCreate extends React.Component {
 
   drop(e) {
     const id = this.state.id
-    e.target.append(document.getElementById(id))
+    const target = e.target
+    target.append(document.getElementById(id))
   }
 
   savePage() {
@@ -37,14 +38,14 @@ class PageCreate extends React.Component {
         <div id='sidebar'>
           <Stickers />
         </div>
-        <div id='newPage' className='dropzone' ondragover={this.allowDrop(event)} ondrop={drop(event)}>
+        <div id='newPage' className='dropzone' ondragover={this.allowDrop(event)} ondrop={this.drop(event)}>
         {
           // page (Gifs in template) img goes here
         }
         </div>
         <div>
        <Link to='/home'>
-          <button onClick={savePage}>SAVE</button>
+          <button onClick={this.savePage}>SAVE</button>
    </Link>
         </div>
       </div>
