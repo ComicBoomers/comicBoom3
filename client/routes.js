@@ -6,7 +6,7 @@ import {Login, Signup} from './components'
 import {me} from './store'
 //Import Main Components Here
 import Navbar from './components/Navbar'
-import { UserHome } from './components/user-home'
+import  UserHome  from './components/user-home'
 import AddVideo from './components/AddVideo'
 import PageCreate from './components/PageCreate'
 import SelectClips from './components/SelectClips'
@@ -22,7 +22,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-
+console.log('logged in props', this.props)
     return (
 
       <div>
@@ -59,7 +59,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
