@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class AddVideo extends React.Component{
+export default class AddVideo extends React.Component {
   constructor(){
     super()
     this.state = {
@@ -11,7 +11,7 @@ export default class AddVideo extends React.Component{
   }
 
   handleChange(event){
-    console.log(event.target.value)
+    console.log(event.target.files)
 
     this.setState({
       video: event.target.value
@@ -27,9 +27,15 @@ handleSubmit(event){
   render(){
     return(
       <div>
-<label htmlFor="video">Choose Your Video:</label>
-<input type="file" id="video" name="video" accept="video/*" onChange={this.handleChange}/>
-<button type ='submit' onClick ={this.handleSubmit}>Upload</button>
+        <label htmlFor="video">Choose Your Video:</label>
+        <input 
+          type="file" 
+          id="file" 
+          name="video" 
+          // accept="video/*" 
+          onChange={this.handleChange}
+          />
+        <button type ='submit' onClick ={this.handleSubmit}>Upload</button>
      </div>
     )
   }

@@ -6,17 +6,22 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const GET_PAGE = 'GET_PAGE'
 
 /**
  * INITIAL STATE
  */
 const defaultUser = {}
-
+const initialState= {
+  user: {},
+  singlePage: {}
+}
 /**
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+const getPage = page =>({type: GET_PAGE, page})
 
 /**
  * THUNK CREATORS
@@ -57,15 +62,26 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const gotPage = (pageId) => async (dispatch)=>{
+  try{
+    const {data} = await axios.get(`/api/page/${pageId}`)
+    dispatch(getPage(data))
+  }catch(err){
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
     case REMOVE_USER:
       return defaultUser
+      case GET_PAGE:
+      return {...state, singlePage: action.page}
     default:
       return state
   }
