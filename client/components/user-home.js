@@ -1,18 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
+export class UserHome extends React.Component {
+
+render(){
+
+
+  const {email} = this.props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+    <div>
+      <h3>Welcome, Sammi</h3>
+      <Link to='/uploadVideo'>
+      <button type ='button' >
+      <img src ='https://www.inmotionnow.com/wp-content/uploads/2017/03/New-to-inMotion-Reviewer-Markup-Sharing-Options-and-Forwarding-from-Review-Interface.png' className ='addNewButton' /></button>
+      </Link>
+    </div>
+    <div>
+    <h2>My Comics</h2>
+    <Link to='/comicPage'>
+    <p>PLACEHOLDER</p>
+    </Link>
+    <p>PLACEHOLDER</p>
+    <p>PLACEHOLDER</p>
+    <p>PLACEHOLDER</p>
+    </div>
     </div>
   )
+}
 }
 
 /**
