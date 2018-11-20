@@ -1,6 +1,7 @@
 # https://www.tutorialspoint.com/python/python_command_line_arguments.htm
 # https://zulko.github.io/moviepy/
 # https://github.com/bgrins/videoconverter.js
+
 from moviepy.editor import *
 import sys
 # video.fx is loaded as vfx
@@ -51,3 +52,5 @@ gifIt(nodeRanIt, outputPath)
 # example
 # different = stackIt('./test.mov')
 # gifIt(different, './test.gif')
+
+# python python/creategifs.py ./tmp/temp.mov ./tmp/temp.gif ./stickers/comicframesh.png ./stickers/bubble.png
