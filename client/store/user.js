@@ -11,18 +11,13 @@ const GET_PAGE = 'GET_PAGE'
 /**
  * INITIAL STATE
  */
-<<<<<<< HEAD
-const initialState = {
-  curUser: {}
-}
-
-=======
 const defaultUser = {}
 const initialState= {
   user: {},
-  singlePage: {}
+  singlePage: {},
+  curUser: {}
 }
->>>>>>> master
+
 /**
  * ACTION CREATORS
  */

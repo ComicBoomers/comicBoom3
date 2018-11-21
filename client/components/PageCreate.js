@@ -34,7 +34,7 @@ class PageCreate extends React.Component {
         <div id='sidebar'>
           <Stickers />
         </div>
-        <div id='newPage' className='dropzone' ondragover={this.allowDrop()} ondrop={this.drop()}>
+        <div id='newPage' className='dropzone' ondragover={this.allowDrop} ondrop={this.drop}>
         {
           // page (Gifs in template) img goes here
         }
