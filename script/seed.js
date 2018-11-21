@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const { User, Page } = require('../server/db/models')
+const { User, Page, Sticker } = require('../server/db/models')
 const { green, red } = require('chalk')
 
 
@@ -60,6 +60,16 @@ const pages = [{
   userId: 3,
 }]
 
+const stickers = [{
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Stickers%2Fbaaam.jpg?alt=media&token=917d02f2-881f-4212-9b59-1d998e1e03a4'
+}, {
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Stickers%2Fbamm.jpg?alt=media&token=51d12418-7e36-495d-81f1-c7651a4b1080'
+}, {
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Stickers%2Fboom.jpg?alt=media&token=76fd924b-5a18-44b7-895f-7e5ce20ca4ac'
+}, {
+  location: 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Stickers%2Fcool.jpg?alt=media&token=6612a1ca-c0d6-4557-9096-87577803dd00'
+}]
+
 const seed = () =>
   Promise.all(users.map(elem => User.create(elem))
   )
@@ -67,6 +77,10 @@ const seed = () =>
       Promise.all(pages.map(elem => Page.create(elem))
       )
     )
+        .then(() =>
+        Promise.all(stickers.map(elem => Sticker.create(elem))
+        )
+  )
 
 const main = () => {
   console.log('Syncing the db...');
@@ -87,6 +101,7 @@ const main = () => {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${pages.length} pages`)
+  console.log(`seeded ${stickers.length} stickers`)
 }
 main();
 // we export the seed function for testing purposes (see `./seed.spec.js`)
