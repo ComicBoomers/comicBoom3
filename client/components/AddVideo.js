@@ -1,41 +1,46 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
 export default class AddVideo extends React.Component {
   constructor(){
     super()
     this.state = {
-      video: ''
+      video: {}
     }
     this.handleChange= this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event){
-    console.log(event.target.files)
-
+    event.preventDefault()
     this.setState({
-      video: event.target.value
+      video: event.target.files[0]
     })
   }
-handleSubmit(event){
-  event.preventDefault()
-  console.log('submitting to database', this.state)
-  //create a thunk to send this back and get this chopped up
-  //maybe put request to storage
-   //not sure how this will work when this information is coming from a local source
-}
+
+  async handleSubmit(event){
+    event.preventDefault()
+    console.log('submitting to database', this.state.video)
+    let formData = new FormData();
+    formData.append('video', this.state.video)
+    await axios.post('/api/upload', formData)
+  }
+
   render(){
+    console.log("STTTATE", this.state.video)
     return(
       <div>
         <label htmlFor="video">Choose Your Video:</label>
-        <input 
-          type="file" 
-          id="file" 
-          name="video" 
-          // accept="video/*" 
-          onChange={this.handleChange}
-          />
-        <button type ='submit' onClick ={this.handleSubmit}>Upload</button>
+        <form onSubmit ={this.handleSubmit} encType='multipart/form-data'>
+          <input 
+            type="file" 
+            id="file" 
+            name="video" 
+            accept="video/*" 
+            onChange={this.handleChange}
+            />
+          <button type='submit'>Upload</button>
+        </form>
      </div>
     )
   }

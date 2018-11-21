@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const html = require('html-template-tag');
 const fs = require('fs');
 const multer = require('multer');
 const upload = multer({ dest: 'cheese/' });
@@ -20,21 +19,12 @@ firebase.initializeApp(config);
 const storage = firebase.storage();
 const storageRef = storage.ref();
 
-router.get('/', function(req, res, next) {
-  res.send(html`
-    <h1>Hello!</h1>
-    <form action="/api/upload" method="post" enctype="multipart/form-data">
-      <input type="file" id="file" name="comic" />
-      <input type="submit" value="Upload" />
-    </form>
-  `);
-});
 
-router.post('/', upload.single('comic'), (req, res, next) => {
+router.post('/', upload.single('video'), (req, res, next) => {
   try {
     fs.readFile(req.file.path, function(err, contents) {
       if (err) {
-        console.log(err);
+        console.log(err.message);
       }
       storageRef
         .child(req.file.originalname)
@@ -44,7 +34,7 @@ router.post('/', upload.single('comic'), (req, res, next) => {
     });
     res.send('hello');
   } catch (err) {
-    console.log('ERROR: ', err);
+    console.log('ERROR: ', err.message);
     next(err);
   }
 });
