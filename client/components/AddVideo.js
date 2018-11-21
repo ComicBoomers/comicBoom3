@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 export default class AddVideo extends React.Component {
   constructor() {
@@ -29,6 +30,10 @@ export default class AddVideo extends React.Component {
   render() {
     return (
       <div>
+        <Link to='/home'>
+          <button>Cancel</button>
+        </Link>
+        <br /><br />
         <label htmlFor="video">Choose Your Video:</label>
         <form onSubmit={this.handleSubmit} encType="multipart/form-data">
           <input
