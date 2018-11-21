@@ -40,7 +40,7 @@ console.log('logged in props', this.props)
             <Route exact path="/uploadVideo" component={AddVideo} />
             <Route exact path="/createComic" component={PageCreate} />
             <Route exact path='/selectClips' component={SelectClips}/>
-            <Route path='/comicPage'
+            <Route exact path='/comicPage/:pageId'
             component = {SinglePage}/>
             {/* BELOW NEED TO BE AVAIL ADMIN ONLY... */}
 
