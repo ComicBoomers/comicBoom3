@@ -1,5 +1,6 @@
 const User = require('./user')
 const Page = require('./page')
+const Sticker = require('./sticker')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -17,5 +18,6 @@ Page.belongsTo(User)
  */
 module.exports = {
   User,
-  Page
+  Page,
+  Sticker
 }

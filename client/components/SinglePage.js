@@ -25,7 +25,7 @@ class SinglePage extends React.Component {
 
 const mapState = state =>{
   return{
-    page: state.user.singlePage
+    page: state.user.curUser.singlePage
   }
 }
 const mapDispatch = dispatch => {

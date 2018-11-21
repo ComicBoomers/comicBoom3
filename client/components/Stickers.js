@@ -1,45 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { dropSticker, allStickers } from '../store'
 
 
 class Stickers extends React.Component {
 
   constructor() {
     super()
-    this.state = {
-      stickers: [],
-      id: null
-    }
-
     this.dragStart=this.dragStart.bind(this)
   }
 
   componentDidMount() {
-    //get stickers from storage in an array if possible
-    //put on state
+    this.props.initiateStickers()
+
   }
 
   dragStart(e) {
-    const id = e.target.id
-    this.setState({id})
+    const stickerId = e.target.id
+    this.props.identifyStickerToDrop(stickerId)
   }
 
   render() {
-  const stickerArr = this.state.stickers
+  const stickers = this.props.allStickers
+  console.log(stickers)
 
-  //sticker.url below is a guess so be sure to check what that object being returned from storage really looks like
   return (
+
     <div class='drag-zone' id='stickerList'>
+     <h1>YAY</h1>
       <ul>
         <label>STICKERS</label>
-        {
-          stickerArr.map(sticker => {
+        { stickers ?
+          stickers.map(sticker => {
             return (
-              <li id={sticker.id} ondragstart={this.dragStart(event)}><img src={sticker.url} /></li>
+              <li id={sticker.id} ondragstart={this.dragStart(event)}><img src={sticker.location} /></li>
 
             )
-          })
+          }) : <div></div>
         }
       </ul>
     </div>
@@ -47,4 +45,20 @@ class Stickers extends React.Component {
       }
 }
 
-export default Stickers
+const mapStateToProps= state => {
+  return {
+    allStickers: state.page.allStickers
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    identifyStickerToDrop(id) {
+    dispatch(dropSticker(id))
+    },
+    initiateStickers() {
+      dispatch(allStickers())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Stickers)
