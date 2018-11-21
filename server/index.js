@@ -50,6 +50,7 @@ const createApp = () => {
   app.use(bodyParser.json({limit: '500mb', extended: true, parameterLimit: 1000000}))
   app.use(bodyParser.urlencoded({limit: '500mb', extended: true, parameterLimit: 1000000}))
 
+
   // compression middleware
   app.use(compression())
 

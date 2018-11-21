@@ -5,16 +5,19 @@ const multer = require('multer');
 
 
 global.XMLHttpRequest = require('xhr2');
+
 const multStorage = multer.diskStorage({
   destination: 'tmp/',
   filename: function(req, file, cb) {
     cb(null, 'temp.mov')
   }
 })
+
 const upload = multer({storage: multStorage}).single('video')
 
 const firebase = require('firebase');
 require('firebase/storage');
+
 const config = {
   apiKey: process.env.FIREBASE_APIKEY,
   authDomain: 'comic-server.firebaseapp.com',

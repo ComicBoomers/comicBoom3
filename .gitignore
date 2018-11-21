@@ -7,3 +7,6 @@ npm-debug.log
 yarn-error.log
 *.mov
 *.gif
+tmp
+temp.mov
+
