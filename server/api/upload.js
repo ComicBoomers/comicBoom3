@@ -2,10 +2,16 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const multer = require('multer');
-const upload = multer({ dest: 'cheese/' });
+
 
 global.XMLHttpRequest = require('xhr2');
-
+const multStorage = multer.diskStorage({
+  destination: 'tmp/',
+  filename: function(req, file, cb) {
+    cb(null, 'temp.mov')
+  }
+})
+const upload = multer({storage: multStorage}).single('video')
 
 const firebase = require('firebase');
 require('firebase/storage');
@@ -20,7 +26,7 @@ const storage = firebase.storage();
 const storageRef = storage.ref();
 
 
-router.post('/', upload.single('video'), (req, res, next) => {
+router.post('/', upload, (req, res, next) => {
   try {
     fs.readFile(req.file.path, function(err, contents) {
       if (err) {
