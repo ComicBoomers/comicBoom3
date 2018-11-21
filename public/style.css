@@ -50,3 +50,9 @@ form div {
 .homePageImage{
   width: 100px;
 }
+
+#newPage{
+  width:400px;
+  height: 400px;
+  background-color:#61dafb
+}

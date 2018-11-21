@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {gotPage} from '../store'
+import { Link } from 'react-router-dom'
 
 class SinglePage extends React.Component {
 	componentDidMount() {
@@ -15,6 +16,7 @@ class SinglePage extends React.Component {
          this.props.page &&
            <div>
          <h1>Comic Title</h1>
+         <button><Link to='/createComic' page={this.props.page.location}>Edit Page</Link></button>
     <img src={this.props.page.location}/>
       </div>
        }

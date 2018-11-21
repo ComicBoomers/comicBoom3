@@ -19,8 +19,8 @@ class PageCreate extends React.Component {
 
   drop(e) {
     const id = this.props.stickerId
-    const target = e.target
-    target.append(document.getElementById(id))
+    console.log('id:', id)
+    e.target.append(document.getElementById(id))
   }
 
   // savePage() {
@@ -34,11 +34,13 @@ class PageCreate extends React.Component {
         <div id='sidebar'>
           <Stickers />
         </div>
-        <div id='newPage' className='dropzone' ondragover={this.allowDrop} ondrop={this.drop}>
+        <div id='newPage' className='dropzone' onDragOver={this.allowDrop} onDrop={this.drop} >
         {
           // page (Gifs in template) img goes here
         }
-        <img src='https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21' />
+
+        {/* <img style={{zindex: 3}} width="800" height="600" src={this.props.page ? this.props.page : 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21'} /> */}
+
         </div>
         <div>
        <Link to='/home'>
