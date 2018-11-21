@@ -34,16 +34,17 @@ class PageCreate extends React.Component {
         <div id='sidebar'>
           <Stickers />
         </div>
-        {/* <div id='newPage' className='dropzone' onDragOver={this.allowDrop(event)} onDrop={this.drop(event)}>
+        <div id='newPage' className='dropzone' ondragover={this.allowDrop()} ondrop={this.drop()}>
         {
           // page (Gifs in template) img goes here
         }
+        <img src='https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21' />
         </div>
         <div>
        <Link to='/home'>
           <button type='button' onClick={this.savePage}>SAVE</button>
    </Link>
-        </div> */}
+        </div>
       </div>
     )
   }
