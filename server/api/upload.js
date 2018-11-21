@@ -55,4 +55,4 @@ router.post('/', upload, (req, res, next) => {
   }
 })
 
-module.exports = router
+module.exports = {router, firebase}

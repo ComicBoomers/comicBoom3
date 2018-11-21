@@ -7,15 +7,16 @@ module.exports = router
 
 global.XMLHttpRequest = require('xhr2')
 
-const firebase = require('firebase')
-require('firebase/storage')
-const config = {
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: 'comic-server.firebaseapp.com',
-  databaseURL: 'https://comic-server.firebaseio.com',
-  storageBucket: 'comic-server.appspot.com'
-}
-firebase.initializeApp(config)
+// const firebase = require('firebase')
+// require('firebase/storage')
+// const config = {
+//   apiKey: process.env.FIREBASE_APIKEY,
+//   authDomain: 'comic-server.firebaseapp.com',
+//   databaseURL: 'https://comic-server.firebaseio.com',
+//   storageBucket: 'comic-server.appspot.com'
+// }
+// firebase.initializeApp(config)
+const {firebase} = require('./upload')
 const storage = firebase.storage()
 const storageRef = storage.ref()
 
