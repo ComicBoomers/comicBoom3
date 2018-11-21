@@ -45,7 +45,7 @@ router.get('/creategifs', async (req, res) => {
             console.log(err)
           }
           storageRef
-            .child(`strawberrytest.gif`)
+            .child(`pineappletest.gif`)
             .put(contents, {contentType: 'image/gif'})
             .then(() => console.log('this worked! :*'))
             .catch(e => console.log('oh no!!! :(', e))
