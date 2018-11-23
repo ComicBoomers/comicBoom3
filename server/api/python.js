@@ -24,9 +24,6 @@ router.get('/creategifs', async (req, res) => {
   try {
     console.log('hit the creategifs')
     const options = {
-      mode: 'text',
-      pythonPath: '/usr/local/bin/python',
-      pythonOptions: ['-u'],
       scriptPath: path.join(__dirname, '/../../python'),
       args: [
         './tmp/temp.mov',
