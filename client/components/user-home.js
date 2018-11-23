@@ -13,7 +13,6 @@ componentDidMount() {
 }
 render(){
   const email = this.props.user.email
-  console.log('My props', this.props)
   return (
     <div>
         {this.props.user.pages &&
@@ -51,7 +50,7 @@ render(){
  */
 const mapState = state => {
   return {
-    user: state.user.curUser
+    user: state.user
   }
 }
 
