@@ -37,8 +37,6 @@ router.post('/', upload, (req, res, next) => {
     })
     res.status(200).send()
   } catch (err) {
-    console.log('ERROR: ', err.message)
     next(err)
   }
 })
-

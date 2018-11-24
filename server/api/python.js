@@ -10,11 +10,10 @@ const firebase = require('./firebase')
 const storage = firebase.storage()
 const storageRef = storage.ref()
 
-router.get('/creategifs', async (req, res) => {
+router.get('/creategifs', async (req, res, next) => {
   try {
     const userId = req.user.id
     const gifId = uuidv4()
-    console.log('hit the creategifs')
     let gifPath = `tmp/gifs//${userId}`
     fsExtra.mkdirsSync(gifPath)
     const options = {
@@ -33,9 +32,8 @@ router.get('/creategifs', async (req, res) => {
     }
     PythonShell.run('creategifs.py', options, function(err, data) {
       if (err) {
-        console.log(err)
+        next(err)
       } else {
-        console.log('inside pythonshell', data)
         fs.readFile(`./tmp/gifs/${userId}/temp.gif`, function(err, contents) {
           if (err) {
             next(err)
@@ -48,7 +46,6 @@ router.get('/creategifs', async (req, res) => {
         })
       }
     })
-    console.log('outside pythonshell hello')
     res.status(200).send()
   } catch (err) {
     console.log(err)
