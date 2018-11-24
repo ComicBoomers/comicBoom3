@@ -17,7 +17,7 @@ class Stickers extends React.Component {
   }
 
   dragStart(e) {
-    e.dataTransfer.effectAllowed = "copy";
+    e.dataTransfer.effectAllowed = "copy"; //not working
     const stickerId = e.target.id
     this.props.identifyStickerToDrop(stickerId)
   }
