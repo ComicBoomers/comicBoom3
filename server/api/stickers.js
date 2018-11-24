@@ -3,7 +3,7 @@ const {User, Page, Sticker} = require('../db/models')
 module.exports = router
 
 // GET /pages
-router.get('/stickers', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const stickers = await Sticker.findAll()
     console.log(stickers)

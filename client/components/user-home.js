@@ -13,6 +13,7 @@ componentDidMount() {
 }
 render(){
   const email = this.props.user.email
+  console.log("UUUUUUUser", this.props.user)
   return (
     <div>
         {this.props.user.pages &&

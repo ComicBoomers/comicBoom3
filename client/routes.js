@@ -49,9 +49,9 @@ console.log('logged in props', this.props)
           </Switch>
         )}
 {
-  !isLoggedIn &&(
-    <Route path="/landingpage" component={LandingPage} />
-  )
+  // !isLoggedIn &&(
+  //   <Route path="/landingpage" component={LandingPage} />
+  // )
 }
       </div>
     )

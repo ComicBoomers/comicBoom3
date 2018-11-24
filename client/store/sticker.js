@@ -36,7 +36,7 @@ export const dropSticker = (id)  => async dispatch => {
 
 export const allStickers = () => async dispatch => {
   try {
-    const res = await axios.get('/api/pages/stickers')
+    const res = await axios.get('/api/stickers')
     console.log("res.data:", res.data)
     dispatch(gotStickers(res.data))
   } catch (err) {
