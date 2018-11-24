@@ -28,6 +28,8 @@ class PageCreate extends React.Component {
   // }
 
   render() {
+    const page = this.props.page.location
+
     return (
 
       <div>
@@ -39,7 +41,7 @@ class PageCreate extends React.Component {
           // page (Gifs in template) img goes here
         }
 
-        {/* <img style={{zindex: 3}} width="800" height="600" src={this.props.page ? this.props.page : 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21'} /> */}
+        {/* <img style={{zindex: 3}} width="800" height="600" src={page ? page : 'https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21'} /> */}
 
         </div>
         <div>

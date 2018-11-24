@@ -10,7 +10,8 @@ import  UserHome  from './components/user-home'
 import AddVideo from './components/AddVideo'
 import PageCreate from './components/PageCreate'
 import SelectClips from './components/SelectClips'
-import SinglePage from './components/SinglePage';
+import SinglePage from './components/SinglePage'
+import Loading from './components/Loading'
 
 /**
  * COMPONENT
@@ -22,7 +23,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-console.log('logged in props', this.props)
+
     return (
 
       <div>
@@ -31,6 +32,7 @@ console.log('logged in props', this.props)
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+
         {/* <Route path="/confirmation" component={Confirmation} /> */}
 
         {isLoggedIn && (
@@ -38,6 +40,7 @@ console.log('logged in props', this.props)
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/uploadVideo" component={AddVideo} />
+            <Route exact path="/loading" component={Loading} />
             <Route exact path="/createComic" component={PageCreate} />
             <Route exact path='/selectClips' component={SelectClips}/>
             <Route exact path='/comicPage/:pageId'

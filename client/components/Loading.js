@@ -1,6 +1,5 @@
 import React from 'react'
-import axios from 'axios'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PageCreate from './PageCreate'
 
 class Loading extends React.Component {
@@ -24,8 +23,10 @@ class Loading extends React.Component {
   }
 
   componentDidMount() {
+    console.log('Loading DidMount')
     //trigger video splicing
-    //put gif page on state as curPage
+    //phython server will send to storage and respond with storage location?
+    //something needs to be waiting to recieve and put gif page on state as curPage
     const palettes = this.state.palettes;
     this.loader( palettes[ Math.floor( Math.random() * palettes.length) ] );
     //run loading animation...not sure if this will run with function called being established below???
@@ -35,10 +36,8 @@ class Loading extends React.Component {
 
       'use strict';
       var palette;
-      var body, loader, squares;
+      var loader, squares;
       var interval;
-
-      var initPeriod = 8;
 
       /* -------------------------
       /* UTILS
@@ -83,7 +82,7 @@ class Loading extends React.Component {
 
       function main( colors ) {
 
-          // There is always 5 colors.
+          // There are always 5 colors.
           palette = [
               colors[0],
               colors[1],
@@ -97,7 +96,7 @@ class Loading extends React.Component {
           ];
 
           // Caching
-          body               = document.body;
+
           loader             = document.querySelector( '.loader' );
           var squareElements = document.querySelectorAll( '.loader .square' );
 
@@ -124,44 +123,49 @@ class Loading extends React.Component {
 
     })();
 
+
+
   render() {
     const page = this.props.page
 
      return (
 
        page ?
-       <PageCreate />
+       <PageCreate page={page}/>
        :
 
-       <div>
-           <div class="loader">
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
+      <div>
+         <div>
+           <div className="loader">
+            <div className="square" />
+            <div className="square" />
+            <div className="square" />
+            <div className="square" />
+            <div className="square" />
+            <div className="square" />
+            <div className="square" />
+            <div className="square" />
+            <div className="square" />
           </div>
 
-          <div class="info">
-            While your video is being BOOMified,
+          <div className="info">
+            Your vid's bein BOOMified!
+
             Refresh for different colors!
           </div>
        </div>
 
-
+       </div>
      )
 
    }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = state => {
   return {
-    page: this.state.page.curPage
+    page: state.page.curPage
   }
+
 }
 
 export default connect(mapStateToProps)(Loading)
