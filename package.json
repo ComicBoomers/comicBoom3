@@ -46,6 +46,7 @@
     "express-session": "^1.15.1",
     "firebase": "^5.5.8",
     "fs": "0.0.1-security",
+    "fs-extra": "^7.0.1",
     "history": "^4.6.3",
     "html-template-tag": "^2.0.0",
     "morgan": "^1.9.1",
