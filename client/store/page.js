@@ -1,58 +1,41 @@
 import axios from 'axios'
-import history from '../history'
 
 /**
  * ACTION TYPES
  */
-const GOT_STICKERS = 'GOT_STICKERS'
-const SET_STICKER = 'SET_STICKER'
-// const REMOVE_USER = 'REMOVE_USER'
+const GET_PAGE = 'GET_PAGE'
 
 /**
  * INITIAL STATE
  */
-const initialState = {
-  allStickers: [],
-  stickerId: ''
+const initialState= {
+  singlePage: {},
 }
 
 /**
  * ACTION CREATORS
  */
-const gotStickers = allStickers => ({type: GOT_STICKERS, allStickers})
-const setSticker = sticker => ({type: SET_STICKER, sticker})
-// const removeUser = () => ({type: REMOVE_USER})
+const getPage = page =>({type: GET_PAGE, page})
 
 /**
  * THUNK CREATORS
  */
-export const dropSticker = (id)  => async dispatch => {
+export const gotPage = (pageId) => async (dispatch)=>{
   try {
-    dispatch(setSticker(id))
-  } catch (err) {
-    console.log(err)
+    const {data} = await axios.get(`/api/page/${pageId}`)
+    dispatch(getPage(data))
+  } catch(err){
+    console.error(err)
   }
 }
 
-export const allStickers = () => async dispatch => {
-  try {
-    const res = await axios.get('/api/pages/stickers')
-    console.log("res.data:", res.data)
-    dispatch(gotStickers(res.data))
-  } catch (err) {
-    console.log(err)
-  }
-}
 /**
  * REDUCER
  */
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GOT_STICKERS:
-      return {...state, allStickers: action.allStickers}
-    case SET_STICKER:
-      return {...state, stickerId: action.sticker}
-
+      case GET_PAGE:
+      return {...state, singlePage: action.page}
     default:
       return state
   }

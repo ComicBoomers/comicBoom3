@@ -40,12 +40,11 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', async (req, res) => {
-  //const user = req.user
+  // const user = req.user
   const user = await User.findOne({
     where: {
       id: req.user.id
       }, include: [{all: true}]
-
   })
   res.json(user)
 })

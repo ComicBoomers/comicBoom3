@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       attributes: ['id', 'email'],
-      //include: {all: true}
+      // include: {all: true}
     })
     res.json(users)
   } catch (err) {
