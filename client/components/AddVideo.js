@@ -24,6 +24,7 @@ export default class AddVideo extends React.Component {
     let formData = new FormData()
     formData.append('video', this.state.video)
     await axios.post('/api/upload', formData)
+    //tranfer to Loading component
   }
 
   render() {
