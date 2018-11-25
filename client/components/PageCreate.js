@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Stickers from './Stickers'
+import { sticker } from '../store'
 
 
 class PageCreate extends React.Component {
@@ -55,7 +56,7 @@ class PageCreate extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    stickerId: state.page.stickerId
+    stickerId: state.sticker.stickerId
   }
 }
 

@@ -11,6 +11,7 @@ import AddVideo from './components/AddVideo'
 import PageCreate from './components/PageCreate'
 import SelectClips from './components/SelectClips'
 import SinglePage from './components/SinglePage';
+import LandingPage from './components/LandingPage';
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ console.log('logged in props', this.props)
         <Navbar />
 
         {/* Routes placed here are available to all visitors */}
+        <Route path="/landingpage" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {/* <Route path="/confirmation" component={Confirmation} /> */}
@@ -46,7 +48,11 @@ console.log('logged in props', this.props)
 
           </Switch>
         )}
-
+{
+  // !isLoggedIn &&(
+  //   <Route path="/landingpage" component={LandingPage} />
+  // )
+}
       </div>
     )
   }
@@ -59,8 +65,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.curUser.id,
-    user: state.user.curUser
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 

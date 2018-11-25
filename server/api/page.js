@@ -4,8 +4,10 @@ module.exports = router
 
 router.get('/:id', async(req, res, next)=>{
   try{
-    const page = await Page.findById(req.params.id)
-    res.json(page)
+    if (req.user) {
+      const page = await Page.findById(req.params.id)
+      res.json(page)
+    }
   }catch(err){
     next(err)
   }

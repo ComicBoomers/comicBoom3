@@ -49,7 +49,7 @@ class Stickers extends React.Component {
 
 const mapStateToProps= state => {
   return {
-    allStickers: state.page.allStickers
+    allStickers: state.sticker.allStickers
   }
 }
 
