@@ -9,15 +9,18 @@ class SinglePage extends React.Component {
 		this.props.getOnePage(pageId);
 	}
  render(){
-   console.log('SinglePage Props', this.props)
    return(
      <div>
        {
-         this.props.page &&
+         this.props.myPage &&
            <div>
          <h1>Comic Title</h1>
-         <button><Link to='/createComic' page={this.props.page.location}>Edit Page</Link></button>
-    <img src={this.props.page.location}/>
+
+         <button><Link to='/createComic' page={this.props.myPage.location}>Edit Page</Link></button>
+
+
+    <img src={this.props.myPage.location}/>
+
       </div>
        }
       </div>
@@ -27,7 +30,7 @@ class SinglePage extends React.Component {
 
 const mapState = state =>{
   return{
-    page: state.user.curUser.singlePage
+    myPage: state.page.singlePage
   }
 }
 const mapDispatch = dispatch => {
