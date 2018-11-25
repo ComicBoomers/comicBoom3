@@ -36,9 +36,9 @@ router.post('/', upload, (req, res, next) => {
     fsExtra.mkdirsSync(gifPath)
     const options = {
       /* comment out the code below before deployment */
-      mode: 'text',
-      pythonPath: '/usr/local/bin/python',
-      pythonOptions: ['-u'],
+      // mode: 'text',
+      // pythonPath: '/usr/local/bin/python',
+      // pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
       args: [
