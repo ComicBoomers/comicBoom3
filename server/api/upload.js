@@ -1,51 +1,42 @@
-const express = require('express');
-const router = express.Router();
-const fs = require('fs');
-const multer = require('multer');
+const express = require('express')
+const router = express.Router()
+const fs = require('fs')
+const fsExtra = require('fs-extra')
+const multer = require('multer')
+module.exports = router
 
+const firebase = require('./firebase')
+const storage = firebase.storage()
+const storageRef = storage.ref()
 
-global.XMLHttpRequest = require('xhr2');
-
-const multStorage = multer.diskStorage({
-  destination: 'tmp/',
-  filename: function(req, file, cb) {
-    cb(null, 'temp.mov')
-  }
-})
-
-const upload = multer({storage: multStorage}).single('video')
-
-const firebase = require('firebase');
-require('firebase/storage');
-
-const config = {
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: 'comic-server.firebaseapp.com',
-  databaseURL: 'https://comic-server.firebaseio.com',
-  storageBucket: 'comic-server.appspot.com',
-};
-firebase.initializeApp(config);
-const storage = firebase.storage();
-const storageRef = storage.ref();
-
+let upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, callback) => {
+      let userId = req.user.id
+      let path = `tmp/uploads//${userId}`
+      fsExtra.mkdirsSync(path)
+      callback(null, path)
+    },
+    filename: (req, file, callback) => {
+      callback(null, 'temp.mov')
+    }
+  })
+}).single('video')
 
 router.post('/', upload, (req, res, next) => {
   try {
     fs.readFile(req.file.path, function(err, contents) {
       if (err) {
-        console.log(err.message);
+        next(err)
       }
       storageRef
-        .child(req.file.originalname)
-        .put(contents, { contentType: req.file.mimetype })
+        .child(`video/${req.user.id}/${req.file.originalname}`)
+        .put(contents, {contentType: req.file.mimetype})
         .then(() => console.log('this worked! :*'))
-        .catch(e => console.log('oh no!!! :(', e));
-    });
-    res.send('hello');
+        .catch(e => console.log('oh no!!! :(', e))
+    })
+    res.status(200).send()
   } catch (err) {
-    console.log('ERROR: ', err.message);
-    next(err);
+    next(err)
   }
-});
-
-module.exports = {router, firebase}
+})
