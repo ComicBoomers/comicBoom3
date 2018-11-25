@@ -27,18 +27,20 @@ class Stickers extends React.Component {
 
   return (
 
-    <div class='drag-zone' id='stickerList'>
-     <h1>YAY</h1>
-      <ul>
-        <label>STICKERS</label>
+    <div className='drag-zone' id='stickerList'>
+     <h1>Decorate Your Comic</h1>
+      <ul >
+        <div>
         { stickers ?
           stickers.map(sticker => {
             return (
-              <li id={sticker.id} ondragstart={this.dragStart(event)}><img src={sticker.location} /></li>
-
+              <div  className='sticky' key={sticker.id}>
+              <li  id={sticker.id} onDragStart={this.dragStart(event)}><img src={sticker.location} className='stickers'/></li>
+              </div>
             )
-          }) : <div></div>
+          }) : <div/>
         }
+        </div>
       </ul>
     </div>
   )

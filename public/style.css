@@ -50,3 +50,45 @@ form div {
 .homePageImage{
   width: 100px;
 }
+
+.stickers{
+  width: 60px;
+  background-color: #333;
+  position: fixed;
+  border-style: solid;
+  border-width: 5px;
+  border-color: grey;
+  cursor: pointer;
+}
+
+.sticky{
+  width: 100%;
+  padding-left: 0px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  list-style-type: none;
+  margin-left: 0px;
+}
+
+.sidebar{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.comicStrip{
+  margin: 1000px;
+}
+
+.speak {
+	position: relative;
+	display: inline-block;
+	min-width: 2.7em;
+	margin: 1em;
+	text-align: center;
+	cursor: pointer;
+}
+
+.speak span {
+	transition: color 0.3s ease-out;
+	color: inherit;
+}
