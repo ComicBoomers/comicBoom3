@@ -19,7 +19,10 @@ class PageCreate extends React.Component {
   drop(e) {
     const id = this.props.stickerId
     console.log('id:', id)
-    e.target.append(document.getElementById(id))
+
+    const itm = document.getElementById(id)
+    e.target.append(itm.cloneNode(true))
+
   }
 
   // savePage() {
@@ -49,6 +52,7 @@ class PageCreate extends React.Component {
             />
           </div>
         </span>
+
         <div>
           <Link to="/home">
             <button type="button" onClick={this.savePage}>
