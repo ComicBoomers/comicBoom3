@@ -1,0 +1,16 @@
+{
+  "short_name": "BOOM",
+  "name": "ComicBOOM",
+  "icons": [
+    {
+      "src": "http://www.i2clipart.com/cliparts/c/7/b/7/128135c7b73b26ec242ae747322ca6ba25575c.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "localhost:8080/landingPage:",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "localhost/8080/landingPage",
+  "theme_color": "#3367D6"
+}
