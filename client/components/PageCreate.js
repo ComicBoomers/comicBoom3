@@ -30,26 +30,20 @@ class PageCreate extends React.Component {
   // }
 
   render() {
-    // const page = this.props.page.location
+    // page = this.props.myPage.location
+    //place ${page} where hard coded url is now
 
     return (
       <div id="myPage">
         <span>
           <Stickers className="sidebar" />
           <div
+            style={ {backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21")`} }
             id="newPage"
             className="dropzone"
             onDragOver={this.allowDrop}
             onDrop={this.drop}
           >
-            {
-              // page (Gifs in template) img goes here
-            }
-            {/* <img
-              clasName="comicStrip"
-              src="https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21"
-              width="500px"
-            /> */}
           </div>
         </span>
 
@@ -68,6 +62,7 @@ class PageCreate extends React.Component {
 const mapStateToProps = state => {
   return {
     stickerId: state.sticker.stickerId
+    //, myPage: state.page.myPage
   }
 }
 
