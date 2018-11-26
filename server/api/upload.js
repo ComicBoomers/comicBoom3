@@ -3,26 +3,32 @@ const router = express.Router()
 const fs = require('fs')
 const fsExtra = require('fs-extra')
 const multer = require('multer')
-const {Page} = require('../db/models')
+const {User, Page} = require('../db/models')
+const {spawn} = require('child_process')
 module.exports = router
-
-const firebase = require('./firebase')
-const storage = firebase.storage()
-const storageRef = storage.ref()
 
 const {PythonShell} = require('python-shell')
 const path = require('path')
 const uuidv4 = require('uuid/v4')
 
-let upload = multer({
+const firebase = require('./firebase')
+const storage = firebase.storage()
+const storageRef = storage.ref()
+
+/* multer captures the data sent by user through the form */
+
+const upload = multer({
   storage: multer.diskStorage({
+    /* the file attached to formData is saved on the server in tmp directory under a folder based on user's Id */
     destination: (req, file, callback) => {
-      let userId = req.user.id
-      let vidPath = `tmp/uploads//${userId}`
+      const userId = req.user.id
+      const vidPath = `tmp/uploads//${userId}`
+      /* fsExtra creates that directory if it does not already exist */
       fsExtra.mkdirsSync(vidPath)
       callback(null, vidPath)
     },
     filename: (req, file, callback) => {
+      /**/
       callback(null, 'temp.mov')
     }
   })
@@ -36,9 +42,9 @@ router.post('/', upload, (req, res, next) => {
     fsExtra.mkdirsSync(gifPath)
     const options = {
       /* comment out the code below before deployment */
-      // mode: 'text',
-      // pythonPath: '/usr/local/bin/python',
-      // pythonOptions: ['-u'],
+      mode: 'text',
+      pythonPath: '/usr/local/bin/python',
+      pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
       args: [
@@ -91,6 +97,30 @@ router.post('/', upload, (req, res, next) => {
                     location: downloadURL,
                     userId
                   })
+                  const rmVid = spawn('rm', [
+                    path.join(__dirname, `../../tmp/uploads/${userId}/temp.mov`)
+                  ])
+                  rmVid.stdout.on('data', dta => {
+                    console.log(`stdout: ${dta}`)
+                  })
+                  rmVid.stderr.on('data', dta => {
+                    console.log(`stderr: ${dta}`)
+                  })
+                  rmVid.on('close', code => {
+                    console.log(`child process exited with code ${code}`)
+                  })
+                  const rmGif = spawn('rm', [
+                    path.join(__dirname, `../../tmp/gifs/${userId}/temp.gif`)
+                  ])
+                  rmGif.stdout.on('data', dta => {
+                    console.log(`stdout: ${dta}`)
+                  })
+                  rmGif.stderr.on('data', dta => {
+                    console.log(`stderr: ${dta}`)
+                  })
+                  rmGif.on('close', code => {
+                    console.log(`child process exited with code ${code}`)
+                  })
                 })
             }
           )
@@ -99,6 +129,7 @@ router.post('/', upload, (req, res, next) => {
     })
     res.status(200).send()
   } catch (err) {
+    console.log('ERROR: ', err.message)
     next(err)
   }
 })
