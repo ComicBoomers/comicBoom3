@@ -50,8 +50,8 @@ router.post('/', upload, (req, res, next) => {
       args: [
         `./tmp/uploads/${userId}/temp.mov`,
         `./${gifPath}/temp.gif`,
-        './stickers/comicframesh.png',
-        './stickers/bubble.png'
+       // './stickers/comicframesh.png',
+       // './stickers/bubble.png'
       ]
     }
     PythonShell.run('creategifs.py', options, function(err, data) {
