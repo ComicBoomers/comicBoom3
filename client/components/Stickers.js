@@ -1,53 +1,61 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { dropSticker, allStickers } from '../store'
-
+import {connect} from 'react-redux'
+import {NavLink} from 'react-router-dom'
+import {dropSticker, allStickers} from '../store'
 
 class Stickers extends React.Component {
-
   constructor() {
     super()
-    this.dragStart=this.dragStart.bind(this)
+    this.dragStart = this.dragStart.bind(this)
   }
 
   componentDidMount() {
     this.props.initiateStickers()
-
   }
 
   dragStart(e) {
+
     e.dataTransfer.effectAllowed = "copy";
+
     const stickerId = e.target.id
     this.props.identifyStickerToDrop(stickerId)
   }
 
   render() {
-  const stickers = this.props.allStickers
-  console.log(stickers)
+    const stickers = this.props.allStickers
+    console.log(stickers)
 
-  return (
+    return (
+      <div className="drag-zone" id="stickerList">
+        <h1>Decorate Your Comic</h1>
+        <ul>
+          <div>
+            {stickers ? (
+              stickers.map(sticker => {
+                return (
+                  <div className="sticky" key={sticker.id}>
+                    <li
+                      draggable="true"
+                      id={sticker.id}
+                      onDragStart={this.dragStart}
+                    >
+                      <img src={sticker.location} className="stickers" />
+                    </li>
+                  </div>
+                )
+              })
+            ) : (
+              <div />
+            )}
+          </div>
+        </ul>
+      </div>
+    )
+  }
 
-    <div class='drag-zone' id='stickerList'>
-     <h1>YAY</h1>
-      <ul>
-        <label>STICKERS</label>
-        { stickers ?
-
-          stickers.map(sticker => {
-            return (
-              <li draggable="true" onDragStart={this.dragStart}><img width="200" height="200" id={sticker.id} src={sticker.location} />{sticker.id}</li>
-
-            )
-          }) : <div></div>
-        }
-      </ul>
-    </div>
-  )
-      }
 }
 
-const mapStateToProps= state => {
+const mapStateToProps = state => {
   return {
     allStickers: state.sticker.allStickers
   }
@@ -56,7 +64,7 @@ const mapStateToProps= state => {
 const mapDispatchToProps = dispatch => {
   return {
     identifyStickerToDrop(id) {
-    dispatch(dropSticker(id))
+      dispatch(dropSticker(id))
     },
     initiateStickers() {
       dispatch(allStickers())
