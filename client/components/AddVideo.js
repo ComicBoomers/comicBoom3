@@ -28,15 +28,17 @@ export default class AddVideo extends React.Component {
 
   render() {
     return (
-      <div>
-        <label htmlFor="video">Choose Your Video:</label>
+      <div id='myPage'>
+
         <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+        <label htmlFor="video" className='pageText'>Choose Your Video:</label>
           <input
             type="file"
             id="file"
             name="video"
             accept="video/*"
             onChange={this.handleChange}
+            color='white'
           />
           <button type="submit">Upload</button>
         </form>

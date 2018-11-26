@@ -31,14 +31,16 @@ class PageCreate extends React.Component {
   render() {
     return (
 
-      <div>
+      <div id='myPage'>
+      <span>
           <Stickers className = 'sidebar' />
         <div id='newPage' className='dropzone' onDragOver={this.allowDrop} onDrop={this.drop}>
         {
           // page (Gifs in template) img goes here
         }
-        <img clasName='comicStrip' src='https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21' width='1000px'/>
+        <img clasName='comicStrip' src='https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21' width='500px'/>
         </div>
+        </span>
         <div>
        <Link to='/home'>
           <button type='button' onClick={this.savePage}>SAVE</button>

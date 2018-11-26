@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {me} from '../store'
+// import batman from '../images/batman_theme_x.wav'
 
 /**
  * COMPONENT
@@ -13,23 +14,23 @@ componentDidMount() {
 }
 render(){
   const email = this.props.user.email
-  console.log("UUUUUUUser", this.props.user)
   return (
-    <div>
+    <div id='myPage'>
+    {/* <embed src={batman}/> */}
         {this.props.user.pages &&
         <div>
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3 className='pageText'>Welcome, {email}</h3>
       <Link to='/uploadVideo'>
       <button type ='button' >
-      <img src ='https://www.inmotionnow.com/wp-content/uploads/2017/03/New-to-inMotion-Reviewer-Markup-Sharing-Options-and-Forwarding-from-Review-Interface.png' className ='addNewButton' /></button>
+      <img src ='https://banner2.kisspng.com/20180701/fss/kisspng-computer-icons-medicine-health-care-plus-button-5b38d58623cf91.1353788815304513341467.jpg' className ='addNewButton' /></button>
       </Link>
     </div>
   <div>
-  <h2>My Comics</h2>{
+  <h2 className='pageText'>My Comics</h2>{
     this.props.user.pages.map(photo =>{
       return (
-        <div key = {photo.id}>
+        <div key = {photo.id} className='myPage'>
            <Link to={{pathname: `/comicPage/${photo.id}`, state: photo.location}}>
   <img src={photo.location} className='homePageImage'/>
   </Link>
@@ -40,7 +41,7 @@ render(){
   }
   </div>
   </div>
-        }
+  }
     </div>
    )
   }

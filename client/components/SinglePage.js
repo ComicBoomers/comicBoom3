@@ -9,14 +9,17 @@ class SinglePage extends React.Component {
 	}
  render(){
    return(
-     <div>
+     <div id='myPage' >
+
        {
-         this.props.myPage &&
-           <div>
-         <h1>Comic Title</h1>
+         this.props.myPage ?
+           <div className='myPage' >
+           <div/>
+         {/* <h1 className=''>Comic Title</h1> */}
     <img src={this.props.myPage.location}/>
       </div>
-       }
+       : <div/>}
+
       </div>
    )
  }
