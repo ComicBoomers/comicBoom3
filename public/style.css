@@ -52,6 +52,7 @@ form div {
   width: 100px;
 }
 
+
 .stickers{
   width: 60px;
   background-color: #333;
@@ -171,6 +172,13 @@ justify-content: center;
 input, textarea {
   background-color : #d1d1d1;
 }
+
+#newPage {
+  height: 200px;
+  width: 200px;
+  background-color: blueviolet
+
+}
 /* Loading Animation: SCSS in this section... */
 .loader {
   transform: translate3d(-50%, -50%, 0px);
@@ -221,3 +229,4 @@ input, textarea {
 }
 
 /*# sourceMappingURL=style.css.map */
+

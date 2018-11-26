@@ -14,8 +14,11 @@ class Stickers extends React.Component {
   }
 
   dragStart(e) {
-    e.dataTransfer.effectAllowed = 'copy' //not working
+
+    e.dataTransfer.effectAllowed = "copy";
+
     const stickerId = e.target.id
+    console.log('stickerId in Drag Start:', stickerId)
     this.props.identifyStickerToDrop(stickerId)
   }
 
@@ -33,11 +36,10 @@ class Stickers extends React.Component {
                 return (
                   <div className="sticky" key={sticker.id}>
                     <li
-                      draggable="true"
-                      id={sticker.id}
-                      onDragStart={this.dragStart}
                     >
-                      <img src={sticker.location} className="stickers" />
+                      <img draggable="true"
+                      id={sticker.id}
+                      onDragStart={this.dragStart}src={sticker.location} className="stickers" />
                     </li>
                   </div>
                 )
@@ -50,6 +52,7 @@ class Stickers extends React.Component {
       </div>
     )
   }
+
 }
 
 const mapStateToProps = state => {
