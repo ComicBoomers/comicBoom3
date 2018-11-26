@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GOT_STICKERS = 'GOT_STICKERS'
 const SET_STICKER = 'SET_STICKER'
+const GOT_ONE = 'GOT_ONE'
 // const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -13,7 +14,8 @@ const SET_STICKER = 'SET_STICKER'
  */
 const initialState = {
   allStickers: [],
-  stickerId: ''
+  stickerId: '',
+  singleSticker: {}
 }
 
 /**
@@ -21,7 +23,7 @@ const initialState = {
  */
 const gotStickers = allStickers => ({type: GOT_STICKERS, allStickers})
 const setSticker = sticker => ({type: SET_STICKER, sticker})
-// const removeUser = () => ({type: REMOVE_USER})
+const gotOne = sticker => ({type: GOT_ONE, sticker})
 
 /**
  * THUNK CREATORS
@@ -43,6 +45,14 @@ export const allStickers = () => async dispatch => {
     console.log(err)
   }
 }
+
+export const oneSticker = (sticker) => async dispatch => {
+  try {
+    await dispatch(gotOne(sticker))
+  } catch (err) {
+    console.log(err)
+  }
+}
 /**
  * REDUCER
  */
@@ -52,6 +62,8 @@ export default function(state = initialState, action) {
       return {...state, allStickers: action.allStickers}
     case SET_STICKER:
       return {...state, stickerId: action.sticker}
+    case GOT_ONE:
+      return {...state, singleSticker: action.sticker}
 
     default:
       return state

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { dropSticker, allStickers } from '../store'
+import { dropSticker, allStickers, oneSticker } from '../store'
 
 
 class Stickers extends React.Component {
@@ -18,13 +18,19 @@ class Stickers extends React.Component {
 
   dragStart(e) {
     e.dataTransfer.effectAllowed = "copy";
-    const stickerId = e.target.id
-    this.props.identifyStickerToDrop(stickerId)
+    const stickerId = +e.target.id
+    console.log(typeof stickerId)
+    console.log(this.props.allStickers)
+
+    const sticker = this.props.allStickers.filter(elem => elem.id === stickerId)
+    console.log("sticker from filter", sticker[0])
+    // this.props.identifyStickerToDrop(stickerId)
+    this.props.gotChosenSticker(sticker[0])
   }
 
   render() {
   const stickers = this.props.allStickers
-  console.log(stickers)
+  console.log("stickers in render:", stickers)
 
   return (
 
@@ -60,6 +66,9 @@ const mapDispatchToProps = dispatch => {
     },
     initiateStickers() {
       dispatch(allStickers())
+    },
+    gotChosenSticker(sticker) {
+      dispatch(oneSticker(sticker))
     }
   }
 }

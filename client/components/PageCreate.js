@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Stickers from './Stickers'
-import { sticker } from '../store'
+
+
 
 
 class PageCreate extends React.Component {
@@ -19,9 +20,13 @@ class PageCreate extends React.Component {
   }
 
   drop(e) {
-    const id = this.props.stickerId
-    console.log('id:', id)
-    e.target.append(document.getElementById(id))
+    // const id = this.props.stickerId
+    // e.target.append(document.getElementById(id))
+    const singleSticker = this.props.singleSticker
+    console.log("sticker in dropfx:", singleSticker)
+    console.log(singleSticker.location)
+    e.target.append(<img src={singleSticker.location} />)
+    //this should result in a copy of sticker being appended instead of original sticker being moved
   }
 
   // savePage() {
@@ -56,8 +61,10 @@ class PageCreate extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    stickerId: state.sticker.stickerId
+    stickerId: state.sticker.stickerId,
+    singleSticker: state.sticker.singleSticker
   }
 }
+
 
 export default connect(mapStateToProps)(PageCreate)

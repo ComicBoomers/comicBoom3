@@ -12,3 +12,14 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// GET /stickers/:stickerId
+router.get('/:stickerId', async (req, res, next) => {
+  try {
+    const sticker = await Sticker.findById(+req.params.stickerId)
+    console.log("sticker:", sticker)
+    res.json(sticker)
+  } catch (err) {
+    next(err)
+  }
+})
