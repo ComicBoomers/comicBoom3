@@ -47,12 +47,7 @@ router.post('/', upload, (req, res, next) => {
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
-      args: [
-        `./tmp/uploads/${userId}/temp.mov`,
-        `./${gifPath}/temp.gif`,
-       // './stickers/comicframesh.png',
-       // './stickers/bubble.png'
-      ]
+      args: [`./tmp/uploads/${userId}/temp.mov`, `./${gifPath}/temp.gif`]
     }
     PythonShell.run('creategifs.py', options, function(err, data) {
       if (err) {
