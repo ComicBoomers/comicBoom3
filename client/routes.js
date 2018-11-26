@@ -6,12 +6,13 @@ import {Login, Signup} from './components'
 import {me} from './store'
 //Import Main Components Here
 import Navbar from './components/Navbar'
-import  UserHome  from './components/user-home'
+import UserHome from './components/user-home'
 import AddVideo from './components/AddVideo'
 import PageCreate from './components/PageCreate'
 import SelectClips from './components/SelectClips'
 import SinglePage from './components/SinglePage'
 import Loading from './components/Loading'
+import LandingPage from './components/LandingPage'
 
 /**
  * COMPONENT
@@ -25,7 +26,6 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-
       <div>
         <Navbar />
 
@@ -43,18 +43,16 @@ class Routes extends Component {
             <Route exact path="/uploadVideo" component={AddVideo} />
             <Route exact path="/loading" component={Loading} />
             <Route exact path="/createComic" component={PageCreate} />
-            <Route exact path='/selectClips' component={SelectClips}/>
-            <Route exact path='/comicPage/:pageId'
-            component = {SinglePage}/>
+            <Route exact path="/selectClips" component={SelectClips} />
+            <Route exact path="/comicPage/:pageId" component={SinglePage} />
             {/* BELOW NEED TO BE AVAIL ADMIN ONLY... */}
-
           </Switch>
         )}
-{
-  // !isLoggedIn &&(
-  //   <Route path="/landingpage" component={LandingPage} />
-  // )
-}
+        {
+          // !isLoggedIn &&(
+          //   <Route path="/landingpage" component={LandingPage} />
+          // )
+        }
       </div>
     )
   }

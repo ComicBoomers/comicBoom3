@@ -120,6 +120,7 @@ router.post('/', upload, (req, res, next) => {
                   })
                   rmGif.on('close', code => {
                     console.log(`child process exited with code ${code}`)
+                    res.status(200).send()
                   })
                 })
             }
@@ -127,7 +128,7 @@ router.post('/', upload, (req, res, next) => {
         })
       }
     })
-    res.status(200).send()
+    //res.status(200).send()
   } catch (err) {
     console.log('ERROR: ', err.message)
     next(err)
