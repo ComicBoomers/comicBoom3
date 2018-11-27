@@ -62,9 +62,12 @@ router.post('/', upload, (req, res, next) => {
   }
 })
 // attach sticker to gif and post to database
+
+// $ curl -X PUT -H "Content-Type: application/json" -d '{"stickerId":"0","stickerX":"60", "stickerY":"60"}' http://localhost:8080/api/upload
 router.put('/', (req, res, next) => {
   try {
     const userId = req.user.id
+    //const userId = 1 // comment out above line to test curl script
     const gifId = uuidv4()
     const vidPath = `tmp/uploads//${userId}`
     const gifPath = `tmp/gifs//${userId}`
@@ -80,8 +83,8 @@ router.put('/', (req, res, next) => {
         `./${vidPath}/temp.mov`,
         `./${gifPath}/temp.gif`,
         `./public/${req.body.stickerId}.png`,
-        req.body.stickerX,
-        req.body.stickerY
+        +req.body.stickerX,
+        +req.body.stickerY
       ]
     }
     PythonShell.run('stickergifs.py', options, function(err, data) {
@@ -93,7 +96,7 @@ router.put('/', (req, res, next) => {
             next(er)
           }
           const uploadTask = storageRef
-            .child(`gif/${req.user.id}/${gifId}.gif`)
+            .child(`gif/${userId}/${gifId}.gif`)
             .put(contents, {contentType: 'image/gif'})
           uploadTask.on(
             'state_changed',
