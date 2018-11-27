@@ -20,25 +20,33 @@ class PageCreate extends React.Component {
   }
 
   drop(e) {
+    ///stickers currently shift slightly to the bottom right on drop and while our dropzone div prevents stickers from jutting out past the top and left boundaries it does not do so for the bottom and right...??
     const id = this.props.stickerId
 
-    const itm = document.getElementById(id)
-    e.target.append(itm.cloneNode(true)) //can we to pagex and pagey?
-
-    //Document Relative: (mouse coords on Drop) - consider rounding to match save coords
-    const [mouseX, mouseY] = [e.pageX, e.pageY]
+    //Document Relative: (mouse coords on Drop) - rounded to match save coords
+    const [mouseX, mouseY] = [Math.round(e.pageX),Math.round(e.pageY)]
     console.log("drop event page x,y:", mouseX, mouseY)
 
-    //drop-zone coords
+    //Placing sticker at mouse drop coordinates
+    const itm = document.getElementById(id)
+
+    const stickerPlacement = (X, Y) => {
+        const clone = itm.cloneNode(true)
+        clone.style.position = "absolute"
+        clone.style.top = `${Y}px`
+        clone.style.left = `${X}px`
+        return clone
+    }
+
+    e.target.append(stickerPlacement(mouseX, mouseY))
+
+    //drop-zone coords (top, left corner)
     const elem = document.getElementById("newPage")
     const coords = elem.getBoundingClientRect()
     const [elemX, elemY] = [coords.left + pageXOffset, coords.top + pageYOffset]
-    console.log("elemTopLeft:", elemX, elemY)
 
-    //mouse coords relative to elem
+    //mouse coords relative to dropzone(gif)
     const [x, y] = [Math.round(mouseX - elemX), Math.round(mouseY - elemY)]
-    console.log('coords for python rounded:', x, y)
-
     this.setState({stickerId: id, stickerX: x, stickerY: y})
   }
 
@@ -63,6 +71,7 @@ class PageCreate extends React.Component {
             style={ {backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21")`} }
             id="newPage"
             className="dropzone"
+            dropzone='copy'
             onDragOver={this.allowDrop}
             onDrop={this.drop}
             onMouseOver={this.mouseTracker}
