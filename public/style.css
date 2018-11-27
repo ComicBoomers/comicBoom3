@@ -54,11 +54,11 @@ form div {
 
 .stickers {
   width: 60px;
-  background-color: #333;
+  /* background-color: #333; */
   position: fixed;
-  border-style: solid;
+  /* border-style: solid;
   border-width: 5px;
-  border-color: grey;
+  border-color: grey; */
   cursor: pointer;
 }
 

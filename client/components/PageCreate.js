@@ -11,7 +11,7 @@ class PageCreate extends React.Component {
 
     this.allowDrop = this.allowDrop.bind(this)
     this.drop = this.drop.bind(this)
-    this.mouseTracker = this.mouseTracker.bind(this)
+    // this.mouseTracker = this.mouseTracker.bind(this)
     this.savePage=this.savePage.bind(this)
   }
 
@@ -47,17 +47,23 @@ class PageCreate extends React.Component {
 
     //mouse coords relative to dropzone(gif)
     const [x, y] = [Math.round(mouseX - elemX), Math.round(mouseY - elemY)]
-    this.setState({stickerId: id, stickerX: x, stickerY: y})
+    this.setState({stickerId: id+1, stickerX: x, stickerY: y})
 
   }
 
-  mouseTracker(e) {
-    console.log("x:", e.pageX, 'y:', e.pageY)
-  }
+  // mouseTracker(e) {
+  //   console.log("x:", e.pageX, 'y:', e.pageY)
+  // }
 
-  savePage() {
-    //everything inside the 'newPage' divId should be saved like a screenshot to storage as a single gif then gif location url from storage is saved to db with logged in user's userId
-    console.log('state:', this.state)
+  async savePage() {
+  // for now will only merge 1 sticker to gif and save gif (gif saved via backend so upon response it will be in the database)
+    const objToMerge = this.state
+    console.log('state:', objToMerge)
+    const res = await axios.put('/api/uploads', objToMerge)
+    console.log("savePage merge sticker via python res:",res)
+    if (res) {
+      history.push('/')
+    }
   }
 
   render() {
@@ -77,13 +83,8 @@ class PageCreate extends React.Component {
             dropzone='copy'
             onDragOver={this.allowDrop}
             onDrop={this.drop}
-<<<<<<< HEAD
-            onMouseOver={this.mouseTracker}
+            // onMouseOver={this.mouseTracker}
           />
-
-=======
-          />
->>>>>>> NewStickers
         </span>
 
         <div>

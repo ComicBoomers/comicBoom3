@@ -43,7 +43,7 @@ router.post('/', upload, (req, res, next) => {
     const options = {
       /* comment out the code below before deployment */
       mode: 'text',
-      pythonPath: '/usr/local/bin/python',
+      pythonPath: '/c/Python27/python',
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
