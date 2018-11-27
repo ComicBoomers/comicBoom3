@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import Stickers from './Stickers'
 import {sticker} from '../store'
+import axios from 'axios'
 
 class PageCreate extends React.Component {
   constructor() {
@@ -46,8 +47,9 @@ class PageCreate extends React.Component {
     const [elemX, elemY] = [coords.left + pageXOffset, coords.top + pageYOffset]
 
     //mouse coords relative to dropzone(gif)
+    const inHouseId = Number(id) + 1
     const [x, y] = [Math.round(mouseX - elemX), Math.round(mouseY - elemY)]
-    this.setState({stickerId: id+1, stickerX: x, stickerY: y})
+    this.setState({stickerId: `${inHouseId}`, stickerX: x, stickerY: y})
 
   }
 
@@ -57,13 +59,13 @@ class PageCreate extends React.Component {
 
   async savePage() {
   // for now will only merge 1 sticker to gif and save gif (gif saved via backend so upon response it will be in the database)
+    console.log(this.state)  
     const objToMerge = this.state
     console.log('state:', objToMerge)
     const res = await axios.put('/api/upload', objToMerge)
     console.log("savePage merge sticker via python res:",res)
-    if (res) {
-      history.push('/')
-    }
+    // history.push('/')
+  
   }
 
   render() {

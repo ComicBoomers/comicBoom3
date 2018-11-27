@@ -22,7 +22,7 @@ const upload = multer({
     /* the file attached to formData is saved on the server in tmp directory under a folder based on user's Id */
     destination: (req, file, callback) => {
       const userId = req.user.id
-      const vidPath = `tmp/uploads//${userId}`
+      const vidPath = `tmp/uploads/${userId}`
       /* fsExtra creates that directory if it does not already exist */
       fsExtra.mkdirsSync(vidPath)
       callback(null, vidPath)
@@ -38,7 +38,7 @@ const upload = multer({
 router.post('/', upload, (req, res, next) => {
   try {
     const userId = req.user.id
-    const gifPath = `tmp/gifs//${userId}`
+    const gifPath = `tmp/gifs/${userId}`
     fsExtra.mkdirsSync(gifPath)
     const options = {
       /* comment out the code below before deployment */
@@ -66,16 +66,17 @@ router.post('/', upload, (req, res, next) => {
 // $ curl -X PUT -H "Content-Type: application/json" -d '{"stickerId":"0","stickerX":"60", "stickerY":"60"}' http://localhost:8080/api/upload
 router.put('/', (req, res, next) => {
   try {
-    const userId = req.user.id
-    //const userId = 1 // comment out above line to test curl script
+    console.log("REEEEQ", req.body)
+    // const userId = req.user.id
+    const userId = 1 // comment out above line to test curl script
     const gifId = uuidv4()
-    const vidPath = `tmp/uploads//${userId}`
-    const gifPath = `tmp/gifs//${userId}`
+    const vidPath = `tmp/uploads/${userId}`
+    const gifPath = `tmp/gifs/${userId}`
     // fsExtra.mkdirsSync(gifPath)
     const options = {
       /* comment out the code below before deployment */
       mode: 'text',
-      pythonPath: '/usr/local/bin/python',
+      pythonPath: '/usr/bin/python',
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
