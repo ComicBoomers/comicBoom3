@@ -1,5 +1,7 @@
 body {
   font-family: sans-serif;
+  background-color: black;
+
 }
 
 a {
@@ -254,6 +256,9 @@ input, textarea {
   margin-left: -7px;
 }
 
+.btn{
+  border-radius:50%
+}
 
 /*# sourceMappingURL=style.css.map */
 
