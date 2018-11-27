@@ -29,7 +29,7 @@ class Stickers extends React.Component {
     return (
       <div className="drag-zone" id="stickerList">
         <h1>Decorate Your Comic</h1>
-        <ul>
+        <ul className = 'sticker-list'>
           <div>
             {stickers ? (
               stickers.map(sticker => {
