@@ -2,6 +2,18 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {gotPage} from '../store'
 import {Link} from 'react-router-dom'
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  EmailShareButton,
+  TumblrShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+  TumblrIcon,
+  EmailIcon,
+} from 'react-share';
 import axios from 'axios'
 import history from '../history'
 
@@ -35,6 +47,7 @@ class SinglePage extends React.Component {
   }
 
   render() {
+    let shareUrl = this.props.myPage.location
     return (
       <div id="myPage">
         {this.props.myPage ? (
@@ -56,6 +69,34 @@ class SinglePage extends React.Component {
               </button>
             )}
             <img src={this.props.myPage.location} />
+            <h3 className='pageText'>Share It!</h3>
+            <FacebookShareButton url={shareUrl}>
+              <FacebookIcon
+              size={32}
+              round />
+            </FacebookShareButton>
+            <TwitterShareButton
+            url={shareUrl}>
+            <TwitterIcon
+              size={32}
+              round />
+            </TwitterShareButton>
+            <WhatsappShareButton
+              url={shareUrl}>
+              <WhatsappIcon size={32} round />
+            </WhatsappShareButton>
+            <TumblrShareButton
+            url={shareUrl}>
+            <TumblrIcon
+              size={32}
+              round />
+            </TumblrShareButton>
+            <EmailShareButton
+            url={shareUrl}>
+            <EmailIcon
+              size={32}
+              round />
+            </EmailShareButton>
           </div>
         ) : (
           <div />
