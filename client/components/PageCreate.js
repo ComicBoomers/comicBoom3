@@ -67,7 +67,8 @@ class PageCreate extends React.Component {
   }
 
   render() {
-    // page = this.props.myPage.location
+    const pageURL = this.props.page
+    console.log(pageUrl)
     //place ${page} where hard coded url is now
 
     return (
@@ -76,7 +77,7 @@ class PageCreate extends React.Component {
           <Stickers className="sidebar" />
           <div
             style={{
-              backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comic-server.appspot.com/o/sticker%2Ftest.gif?alt=media&token=bb169f2b-a2f3-40aa-8e0a-ede072ca5aa7")`
+              backgroundImage: `url(${pageURL})`
             }}
             id="newPage"
             className="dropzone"
