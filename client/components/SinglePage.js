@@ -70,9 +70,7 @@ class SinglePage extends React.Component {
               </button>
             )}
             <img src={this.props.myPage.location} />
-            <button>Share It!
-
-            </button>
+            <h3 className='pageText'>Share It!</h3>
             <FacebookShareButton url={shareUrl}>
               <FacebookIcon
               size={32}
