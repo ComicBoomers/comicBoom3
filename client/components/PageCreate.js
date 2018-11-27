@@ -22,7 +22,6 @@ class PageCreate extends React.Component {
 
     const itm = document.getElementById(id)
     e.target.append(itm.cloneNode(true))
-
   }
 
   // savePage() {
@@ -38,17 +37,18 @@ class PageCreate extends React.Component {
         <span>
           <Stickers className="sidebar" />
           <div
-            style={ {backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21")`} }
+            style={{
+              backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comic-server.appspot.com/o/sticker%2Ftest.gif?alt=media&token=bb169f2b-a2f3-40aa-8e0a-ede072ca5aa7")`
+            }}
             id="newPage"
             className="dropzone"
             onDragOver={this.allowDrop}
             onDrop={this.drop}
-          >
-          </div>
+          />
         </span>
 
         <div>
-          <Link to="/home">
+          <Link to="/">
             <button type="button" onClick={this.savePage}>
               SAVE
             </button>

@@ -6,10 +6,8 @@ global.XMLHttpRequest = require('xhr2')
 
 const config = {
   apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: 'comic-server.firebaseapp.com',
-  databaseURL: 'https://comic-server.firebaseio.com',
-  storageBucket: 'comic-server.appspot.com'
+  authDomain: process.env.FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.FIREBASE_DATABASEURL,
+  storageBucket: process.env.STORAGE_BUCKET
 }
 firebase.initializeApp(config)
-
-
