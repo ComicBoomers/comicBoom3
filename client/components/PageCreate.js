@@ -7,9 +7,12 @@ import {sticker} from '../store'
 class PageCreate extends React.Component {
   constructor() {
     super()
+    this.state = {}
+
     this.allowDrop = this.allowDrop.bind(this)
     this.drop = this.drop.bind(this)
-    // this.savePage=this.savePage.bind(this)
+    this.mouseTracker = this.mouseTracker.bind(this)
+    this.savePage=this.savePage.bind(this)
   }
 
   allowDrop(e) {
@@ -18,16 +21,35 @@ class PageCreate extends React.Component {
 
   drop(e) {
     const id = this.props.stickerId
-    console.log('id:', id)
 
     const itm = document.getElementById(id)
-    e.target.append(itm.cloneNode(true))
+    e.target.append(itm.cloneNode(true)) //can we to pagex and pagey?
 
+    //Document Relative: (mouse coords on Drop) - consider rounding to match save coords
+    const [mouseX, mouseY] = [e.pageX, e.pageY]
+    console.log("drop event page x,y:", mouseX, mouseY)
+
+    //drop-zone coords
+    const elem = document.getElementById("newPage")
+    const coords = elem.getBoundingClientRect()
+    const [elemX, elemY] = [coords.left + pageXOffset, coords.top + pageYOffset]
+    console.log("elemTopLeft:", elemX, elemY)
+
+    //mouse coords relative to elem
+    const [x, y] = [Math.round(mouseX - elemX), Math.round(mouseY - elemY)]
+    console.log('coords for python rounded:', x, y)
+
+    this.setState({stickerId: id, stickerX: x, stickerY: y})
   }
 
-  // savePage() {
-  //   //everything inside the 'newPage' divId should be saved like a screenshot to storage as a single image then image location url from storage is saved to db with logged in user's userId
-  // }
+  mouseTracker(e) {
+    console.log("x:", e.pageX, 'y:', e.pageY)
+  }
+
+  savePage() {
+    //everything inside the 'newPage' divId should be saved like a screenshot to storage as a single gif then gif location url from storage is saved to db with logged in user's userId
+    console.log('state:', this.state)
+  }
 
   render() {
     // page = this.props.myPage.location
@@ -43,8 +65,9 @@ class PageCreate extends React.Component {
             className="dropzone"
             onDragOver={this.allowDrop}
             onDrop={this.drop}
-          >
-          </div>
+            onMouseOver={this.mouseTracker}
+          />
+
         </span>
 
         <div>
