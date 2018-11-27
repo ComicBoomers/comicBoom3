@@ -34,10 +34,10 @@ const upload = multer({
   })
 }).single('video')
 
+// create temp gif
 router.post('/', upload, (req, res, next) => {
   try {
     const userId = req.user.id
-    const gifId = uuidv4()
     const gifPath = `tmp/gifs//${userId}`
     fsExtra.mkdirsSync(gifPath)
     const options = {
@@ -50,6 +50,41 @@ router.post('/', upload, (req, res, next) => {
       args: [`./tmp/uploads/${userId}/temp.mov`, `./${gifPath}/temp.gif`]
     }
     PythonShell.run('creategifs.py', options, function(err, data) {
+      if (err) {
+        next(err)
+      } else {
+        res.status(200).send()
+      }
+    })
+  } catch (err) {
+    console.log('ERROR: ', err.message)
+    next(err)
+  }
+})
+// attach sticker to gif and post to database
+router.put('/', (req, res, next) => {
+  try {
+    const userId = req.user.id
+    const gifId = uuidv4()
+    const vidPath = `tmp/uploads//${userId}`
+    const gifPath = `tmp/gifs//${userId}`
+    // fsExtra.mkdirsSync(gifPath)
+    const options = {
+      /* comment out the code below before deployment */
+      mode: 'text',
+      pythonPath: '/usr/local/bin/python',
+      pythonOptions: ['-u'],
+      /* comment out the code above before deployment */
+      scriptPath: path.join(__dirname, '/../../python'),
+      args: [
+        `./${vidPath}/temp.mov`,
+        `./${gifPath}/temp.gif`,
+        `./public/${req.body.stickerId}.png`,
+        req.body.stickerX,
+        req.body.stickerY
+      ]
+    }
+    PythonShell.run('stickergifs.py', options, function(err, data) {
       if (err) {
         next(err)
       } else {
@@ -123,9 +158,7 @@ router.post('/', upload, (req, res, next) => {
         })
       }
     })
-    //res.status(200).send()
   } catch (err) {
-    console.log('ERROR: ', err.message)
     next(err)
   }
 })
