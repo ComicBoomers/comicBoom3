@@ -26,7 +26,7 @@ class UserHome extends Component {
           {
             this.props.user.pages ?
 
-            <div>
+            <div >
               <div>
                 <Link to='/uploadVideo'>
                 <button type ='button' >
@@ -35,12 +35,12 @@ class UserHome extends Component {
                 <h2 className='pageText'>My Comics</h2>
               </div>
 
-              <div>
+              <div className='box-content'>
                 {
                   this.props.user.pages.map(photo =>
                     {
                     return (
-                      <div key = {photo.id} className='myPage'>
+                      <div key = {photo.id}>
                         <Link to={{pathname: `/comicPage/${photo.id}`, state: photo.location}}>
                         <img src={photo.location} className='homePageImage'/>
                         </Link>
