@@ -48,6 +48,7 @@ class PageCreate extends React.Component {
     //mouse coords relative to dropzone(gif)
     const [x, y] = [Math.round(mouseX - elemX), Math.round(mouseY - elemY)]
     this.setState({stickerId: id, stickerX: x, stickerY: y})
+
   }
 
   mouseTracker(e) {
@@ -68,19 +69,25 @@ class PageCreate extends React.Component {
         <span>
           <Stickers className="sidebar" />
           <div
-            style={ {backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comicboom-71166.appspot.com/o/Dummy%20Images%2Fanimal-animal-photography-cat-96938.jpg?alt=media&token=81a2dd17-6b33-4ea2-976c-24ecb435cd21")`} }
+            style={{
+              backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comic-server.appspot.com/o/sticker%2Ftest.gif?alt=media&token=bb169f2b-a2f3-40aa-8e0a-ede072ca5aa7")`
+            }}
             id="newPage"
             className="dropzone"
             dropzone='copy'
             onDragOver={this.allowDrop}
             onDrop={this.drop}
+<<<<<<< HEAD
             onMouseOver={this.mouseTracker}
           />
 
+=======
+          />
+>>>>>>> NewStickers
         </span>
 
         <div>
-          <Link to="/home">
+          <Link to="/">
             <button type="button" onClick={this.savePage}>
               SAVE
             </button>

@@ -2,12 +2,38 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {gotPage} from '../store'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import history from '../history'
+
+const areYouSure = false
 
 class SinglePage extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      areYouSure
+    }
+    this.handleDelete = this.handleDelete.bind(this)
+    this.triggerConfirm = this.triggerConfirm.bind(this)
+  }
   componentDidMount() {
     let pageId = Number(this.props.match.params.pageId)
     this.props.getOnePage(pageId)
   }
+
+  triggerConfirm() {
+    this.setState({
+      areYouSure: true
+    })
+  }
+
+  async handleDelete() {
+    let pageId = Number(this.props.match.params.pageId)
+    this.props.getOnePage(pageId)
+    const foo = await axios.delete(`/api/page/${pageId}`)
+    Promise.all([foo, history.push('/')])
+  }
+
   render() {
     return (
       <div id="myPage">
@@ -17,15 +43,23 @@ class SinglePage extends React.Component {
             {/* <h1 className=''>Comic Title</h1> */}
             <button type="button">
               <Link to="/createComic" page={this.props.myPage.location}>
-                Edit Page
+                Edit Comic
               </Link>
             </button>
+            {this.state.areYouSure ? (
+              <button type="button" onClick={this.handleDelete}>
+                Confirm Delete
+              </button>
+            ) : (
+              <button type="button" onClick={this.triggerConfirm}>
+                Delete Comic
+              </button>
+            )}
             <img src={this.props.myPage.location} />
           </div>
         ) : (
           <div />
         )}
-
       </div>
     )
   }
