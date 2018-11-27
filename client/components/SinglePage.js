@@ -42,7 +42,7 @@ class SinglePage extends React.Component {
             <div />
             {/* <h1 className=''>Comic Title</h1> */}
             <button type="button">
-              <Link to="/createComic" page={this.props.myPage.location}>
+              <Link to="/createComic">
                 Edit Comic
               </Link>
             </button>
