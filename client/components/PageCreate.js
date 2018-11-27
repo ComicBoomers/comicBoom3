@@ -59,17 +59,20 @@ class PageCreate extends React.Component {
 
   async savePage() {
   // for now will only merge 1 sticker to gif and save gif (gif saved via backend so upon response it will be in the database)
-    console.log(this.state)  
+    console.log(this.state)
     const objToMerge = this.state
     console.log('state:', objToMerge)
     const res = await axios.put('/api/upload', objToMerge)
     console.log("savePage merge sticker via python res:",res)
     // history.push('/')
-  
+
   }
 
   render() {
-    const pageURL = this.props.myPage.location
+    const userId = this.props.user.id
+    const pageURL = `tmp/gifs/${userId}` //will this point to our gif?
+    //we need the user ID
+    //page is going to be coming from temp/gifs/ not state...how to call that up ?/?
     console.log(pageURL)
     //place ${page} where hard coded url is now
 
@@ -105,7 +108,8 @@ class PageCreate extends React.Component {
 const mapStateToProps = state => {
   return {
     stickerId: state.sticker.stickerId,
-    myPage: state.page.singlePage
+    myPage: state.page.singlePage,
+    user: state.user
   }
 }
 

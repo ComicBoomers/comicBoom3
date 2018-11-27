@@ -54,11 +54,11 @@ class SinglePage extends React.Component {
           <div className="myPage">
             <div />
             {/* <h1 className=''>Comic Title</h1> */}
-            <button type="button">
+            {/* <button type="button">
               <Link to="/createComic">
                 Edit Comic
               </Link>
-            </button>
+            </button> */}
             {this.state.areYouSure ? (
               <button type="button" onClick={this.handleDelete}>
                 Confirm Delete

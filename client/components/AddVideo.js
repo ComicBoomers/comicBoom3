@@ -31,7 +31,7 @@ export default class AddVideo extends React.Component {
     let loaded = await axios.post('/api/upload', formData)
     console.log('handle submit loaded in AddVideo', loaded)
     if (loaded) {
-      history.push('/')
+      history.push('/createComic')
     }
   }
 
