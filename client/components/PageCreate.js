@@ -59,7 +59,7 @@ class PageCreate extends React.Component {
   // for now will only merge 1 sticker to gif and save gif (gif saved via backend so upon response it will be in the database)
     const objToMerge = this.state
     console.log('state:', objToMerge)
-    const res = await axios.put('/api/uploads', objToMerge)
+    const res = await axios.put('/api/upload', objToMerge)
     console.log("savePage merge sticker via python res:",res)
     if (res) {
       history.push('/')
@@ -67,8 +67,8 @@ class PageCreate extends React.Component {
   }
 
   render() {
-    const pageURL = this.props.page
-    console.log("URLLLL", pageURL)
+    const pageURL = this.props.myPage.location
+    console.log(pageURL)
     //place ${page} where hard coded url is now
 
     return (
@@ -102,8 +102,8 @@ class PageCreate extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    stickerId: state.sticker.stickerId
-    //, myPage: state.page.myPage
+    stickerId: state.sticker.stickerId,
+    myPage: state.page.singlePage
   }
 }
 
