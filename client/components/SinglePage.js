@@ -2,6 +2,25 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {gotPage} from '../store'
 import {Link} from 'react-router-dom'
+import {
+  FacebookShareButton,
+  GooglePlusShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  PinterestShareButton,
+  VKShareButton,
+  OKShareButton,
+  RedditShareButton,
+  TumblrShareButton,
+  LivejournalShareButton,
+  MailruShareButton,
+  ViberShareButton,
+  WorkplaceShareButton,
+  LineShareButton,
+  EmailShareButton,
+} from 'react-share';
 
 class SinglePage extends React.Component {
   componentDidMount() {
@@ -9,6 +28,7 @@ class SinglePage extends React.Component {
     this.props.getOnePage(pageId)
   }
   render() {
+    console.log("PROPS", this.props.myPage)
     return (
       <div id="myPage">
         {this.props.myPage ? (
@@ -21,6 +41,10 @@ class SinglePage extends React.Component {
               </Link>
             </button>
             <img src={this.props.myPage.location} />
+            <button>Share It!
+
+            </button>
+              <TwitterShareButton children={this.props.myPage} url={this.props.myPage.location} />
           </div>
         ) : (
           <div />
