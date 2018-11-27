@@ -48,7 +48,6 @@ class SinglePage extends React.Component {
 
   render() {
     let shareUrl = this.props.myPage.location
-    console.log("PROPS", this.props.myPage)
     return (
       <div id="myPage">
         {this.props.myPage ? (
