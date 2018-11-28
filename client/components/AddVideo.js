@@ -32,14 +32,14 @@ export default class AddVideo extends React.Component {
     console.log('handle submit loaded in AddVideo', loaded)
     if (loaded) {
       history.push('/')
-    }
   }
+ }
 
   render() {
     return this.state.loadingStatus === '' ? (
       <div id="myPage">
         <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-          <label htmlFor="video" className="pageText">
+          <label htmlFor="video">
             Choose Your Video:
           </label>
           <input
@@ -49,6 +49,7 @@ export default class AddVideo extends React.Component {
             accept="video/*"
             onChange={this.handleChange}
             color="white"
+            required
           />
           <button type="submit">Upload</button>
         </form>

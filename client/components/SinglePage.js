@@ -49,9 +49,9 @@ class SinglePage extends React.Component {
   render() {
     let shareUrl = this.props.myPage.location
     return (
-      <div id="myPage">
+      <div>
         {this.props.myPage ? (
-          <div className="myPage">
+          <div >
             <div />
             {/* <h1 className=''>Comic Title</h1> */}
             <button type="button">
@@ -69,7 +69,7 @@ class SinglePage extends React.Component {
               </button>
             )}
             <img src={this.props.myPage.location} />
-            <h3 className='pageText'>Share It!</h3>
+            <h3>Share It!</h3>
             <FacebookShareButton url={shareUrl}>
               <FacebookIcon
               size={32}

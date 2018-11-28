@@ -35,7 +35,7 @@ class PageCreate extends React.Component {
     return (
       <div id="myPage">
         <span>
-          <Stickers className="sidebar" />
+          <Stickers/>
           <div
             style={{
               backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/comic-server.appspot.com/o/sticker%2Ftest.gif?alt=media&token=bb169f2b-a2f3-40aa-8e0a-ede072ca5aa7")`

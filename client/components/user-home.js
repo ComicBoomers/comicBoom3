@@ -19,10 +19,8 @@ class UserHome extends Component {
 
     return (
 
-      <div id='myPage'>
-        <h3 className='pageText'>Welcome, {email}</h3>
-
-        {/* <embed src={batman}/> */}
+      <div>
+        <h3>Welcome, {email}</h3>
           {
             this.props.user.pages ?
 
@@ -30,19 +28,21 @@ class UserHome extends Component {
               <div>
                 <Link to='/uploadVideo'>
                 <button type ='button' >
-                <img src ='https://banner2.kisspng.com/20180701/fss/kisspng-computer-icons-medicine-health-care-plus-button-5b38d58623cf91.1353788815304513341467.jpg' className ='addNewButton' /></button>
+                {/* <img src ='https://banner2.kisspng.com/20180701/fss/kisspng-computer-icons-medicine-health-care-plus-button-5b38d58623cf91.1353788815304513341467.jpg' className ='addNewButton' /> */}
+                Add New
+                </button>
                 </Link>
-                <h2 className='pageText'>My Comics</h2>
+                <h2>My Comics</h2>
               </div>
 
-              <div className='box-content'>
+              <div>
                 {
                   this.props.user.pages.map(photo =>
                     {
                     return (
                       <div key = {photo.id}>
                         <Link to={{pathname: `/comicPage/${photo.id}`, state: photo.location}}>
-                        <img src={photo.location} className='homePageImage'/>
+                        <img src={photo.location}/>
                         </Link>
                       </div>)
                     })
