@@ -4,11 +4,17 @@ import {Link} from 'react-router-dom'
 import Stickers from './Stickers'
 import {sticker} from '../store'
 import axios from 'axios'
+import Loading from './Loading'
 
 class PageCreate extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      stickerId: '',
+      stickerX: null,
+      stickerY: null,
+      loading: false
+    }
 
     this.allowDrop = this.allowDrop.bind(this)
     this.drop = this.drop.bind(this)
@@ -59,30 +65,40 @@ class PageCreate extends React.Component {
 
   async savePage() {
   // for now will only merge 1 sticker to gif and save gif (gif saved via backend so upon response it will be in the database)
-    console.log(this.state)
+    this.setState({loading: true})
+    console.log("hit here",this.state)
     const objToMerge = this.state
     console.log('state:', objToMerge)
     const res = await axios.put('/api/upload', objToMerge)
-    console.log("savePage merge sticker via python res:",res)
-    // history.push('/')
-
+    if (res) {
+      this.setState({loading: false})
+      this.props.history.push('/')
+    } 
   }
 
   render() {
     const userId = this.props.user.id
-    const pageURL = `tmp/gifs/${userId}` //will this point to our gif?
+    console.log("USER ID: ", userId)
+    const pagePath = `/tmp/gifs/${userId}/temp.gif` 
+
+    const loading = this.state.loading
     //we need the user ID
     //page is going to be coming from temp/gifs/ not state...how to call that up ?/?
-    console.log(pageURL)
     //place ${page} where hard coded url is now
 
     return (
+      
+       loading ? 
+        <Loading />
+      :
+      
       <div id="myPage">
         <span>
           <Stickers className="sidebar" />
+          {/* <img src={pageURL} /> */}
           <div
             style={{
-              backgroundImage: `url(${pageURL})`
+              backgroundImage: `url(${pagePath})`
             }}
             id="newPage"
             className="dropzone"
@@ -94,11 +110,11 @@ class PageCreate extends React.Component {
         </span>
 
         <div>
-          <Link to="/">
+          {/* <Link to="/"> */}
             <button type="button" onClick={this.savePage}>
               SAVE
             </button>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
     )
