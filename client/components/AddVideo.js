@@ -38,20 +38,30 @@ export default class AddVideo extends React.Component {
   render() {
     return this.state.loadingStatus === '' ? (
       <div id="myPage">
-        <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-          <label htmlFor="video" className="pageText">
-            Choose Your Video:
-          </label>
-          <input
-            type="file"
-            id="file"
-            name="video"
-            accept="video/*"
-            onChange={this.handleChange}
-            color="white"
-          />
-          <button type="submit">Upload</button>
-        </form>
+        <div>
+          <div>
+            <h3 className="instructions">
+              Take a video and turn it into a comicBOOM!
+            </h3>
+          </div>
+          <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+            <label htmlFor="video" className="instructions">
+              👀 Add A Video 👀
+            </label>
+            <input
+              type="file"
+              id="file"
+              name="video"
+              accept="video/*"
+              onChange={this.handleChange}
+              color="white"
+              className="custom-file-input uploadvideo"
+            />
+            <button type="submit" className="boomify">
+              BOOMIFY
+            </button>
+          </form>
+        </div>
       </div>
     ) : (
       <Loading />

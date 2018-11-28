@@ -136,7 +136,7 @@ class Loading extends React.Component {
             <div className="square" />
           </div>
 
-          <div className="info">It's coming we promise :D</div>
+          <div className="info">👯It's coming we promise :D👯</div>
         </div>
       </div>
     )
