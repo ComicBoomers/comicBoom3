@@ -91,7 +91,10 @@ router.put('/', (req, res, next) => {
       if (err) {
         next(err)
       } else {
-        fs.readFile(`./public/tmp/gifs/${userId}/temp.gif`, function(er, contents) {
+        fs.readFile(`./public/tmp/gifs/${userId}/temp.gif`, function(
+          er,
+          contents
+        ) {
           if (er) {
             next(er)
           }
@@ -131,7 +134,10 @@ router.put('/', (req, res, next) => {
                     userId
                   })
                   const rmVid = spawn('rm', [
-                    path.join(__dirname, `../../public/tmp/uploads/${userId}/temp.mov`)
+                    path.join(
+                      __dirname,
+                      `../../public/tmp/uploads/${userId}/temp.mov`
+                    )
                   ])
                   rmVid.stdout.on('data', dta => {
                     console.log(`stdout: ${dta}`)
@@ -143,7 +149,10 @@ router.put('/', (req, res, next) => {
                     console.log(`child process exited with code ${code}`)
                   })
                   const rmGif = spawn('rm', [
-                    path.join(__dirname, `../../public/tmp/gifs/${userId}/temp.gif`)
+                    path.join(
+                      __dirname,
+                      `../../public/tmp/gifs/${userId}/temp.gif`
+                    )
                   ])
                   rmGif.stdout.on('data', dta => {
                     console.log(`stdout: ${dta}`)
