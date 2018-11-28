@@ -23,6 +23,7 @@ export default class AddVideo extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
+    if (this.state.video) {
     let formData = new FormData()
     formData.append('video', this.state.video)
     this.setState({
@@ -32,6 +33,8 @@ export default class AddVideo extends React.Component {
     console.log('handle submit loaded in AddVideo', loaded)
     if (loaded) {
       history.push('/createComic')
+    } } else {
+      
     }
   }
 
