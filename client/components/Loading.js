@@ -24,7 +24,7 @@ class Loading extends React.Component {
   componentDidMount() {
     console.log('Loading DidMount')
     //trigger video splicing
-    //phython server will send to storage and respond with storage location?
+    //phython server will send to temp file and respond with?
     //something needs to be waiting to recieve and put gif page on state as curPage
     const palettes = this.state.palettes
     this.loader(palettes[Math.floor(Math.random() * palettes.length)])
@@ -117,11 +117,12 @@ class Loading extends React.Component {
   })()
 
   render() {
-    const page = this.props.page
+    //const page = inside internal temp/gifs
 
-    return page ? (
-      <PageCreate page={page} />
-    ) : (
+    return (
+    // return page ? (
+    //   <PageCreate page={page} />
+    // ) : (
       <div background-color="black">
         <div>
           <div className="loader">
@@ -145,7 +146,7 @@ class Loading extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    page: state.page.curPage
+    page: state.page.curPage ///page wont be here until after sticker is placed
   }
 }
 

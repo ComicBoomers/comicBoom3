@@ -22,7 +22,7 @@ const upload = multer({
     /* the file attached to formData is saved on the server in tmp directory under a folder based on user's Id */
     destination: (req, file, callback) => {
       const userId = req.user.id
-      const vidPath = `tmp/uploads//${userId}`
+      const vidPath = `public/tmp/uploads/${userId}`
       /* fsExtra creates that directory if it does not already exist */
       fsExtra.mkdirsSync(vidPath)
       callback(null, vidPath)
@@ -34,11 +34,11 @@ const upload = multer({
   })
 }).single('video')
 
+// create temp gif
 router.post('/', upload, (req, res, next) => {
   try {
     const userId = req.user.id
-    const gifId = uuidv4()
-    const gifPath = `tmp/gifs//${userId}`
+    const gifPath = `public/tmp/gifs/${userId}`
     fsExtra.mkdirsSync(gifPath)
     const options = {
       /* comment out the code below before deployment */
@@ -47,18 +47,56 @@ router.post('/', upload, (req, res, next) => {
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
-      args: [`./tmp/uploads/${userId}/temp.mov`, `./${gifPath}/temp.gif`]
+      args: [`./public/tmp/uploads/${userId}/temp.mov`, `./${gifPath}/temp.gif`]
     }
     PythonShell.run('creategifs.py', options, function(err, data) {
       if (err) {
         next(err)
       } else {
-        fs.readFile(`./tmp/gifs/${userId}/temp.gif`, function(er, contents) {
+        res.status(200).send()
+      }
+    })
+  } catch (err) {
+    console.log('ERROR: ', err.message)
+    next(err)
+  }
+})
+// attach sticker to gif and post to database
+
+// $ curl -X PUT -H "Content-Type: application/json" -d '{"stickerId":"0","stickerX":"60", "stickerY":"60"}' http://localhost:8080/api/upload
+router.put('/', (req, res, next) => {
+  try {
+    // const userId = req.user.id
+    const userId = 1 // comment out above line to test curl script
+    const gifId = uuidv4()
+    const vidPath = `public/tmp/uploads/${userId}`
+    const gifPath = `public/tmp/gifs/${userId}`
+    // fsExtra.mkdirsSync(gifPath)
+    const options = {
+      /* comment out the code below before deployment */
+      mode: 'text',
+      pythonPath: '/usr/bin/python',
+      pythonOptions: ['-u'],
+      /* comment out the code above before deployment */
+      scriptPath: path.join(__dirname, '/../../python'),
+      args: [
+        `./${vidPath}/temp.mov`,
+        `./${gifPath}/temp.gif`,
+        `./public/${req.body.stickerId}.png`,
+        +req.body.stickerX,
+        +req.body.stickerY
+      ]
+    }
+    PythonShell.run('stickergifs.py', options, function(err, data) {
+      if (err) {
+        next(err)
+      } else {
+        fs.readFile(`./public/tmp/gifs/${userId}/temp.gif`, function(er, contents) {
           if (er) {
             next(er)
           }
           const uploadTask = storageRef
-            .child(`gif/${req.user.id}/${gifId}.gif`)
+            .child(`gif/${userId}/${gifId}.gif`)
             .put(contents, {contentType: 'image/gif'})
           uploadTask.on(
             'state_changed',
@@ -93,7 +131,7 @@ router.post('/', upload, (req, res, next) => {
                     userId
                   })
                   const rmVid = spawn('rm', [
-                    path.join(__dirname, `../../tmp/uploads/${userId}/temp.mov`)
+                    path.join(__dirname, `../../public/tmp/uploads/${userId}/temp.mov`)
                   ])
                   rmVid.stdout.on('data', dta => {
                     console.log(`stdout: ${dta}`)
@@ -105,7 +143,7 @@ router.post('/', upload, (req, res, next) => {
                     console.log(`child process exited with code ${code}`)
                   })
                   const rmGif = spawn('rm', [
-                    path.join(__dirname, `../../tmp/gifs/${userId}/temp.gif`)
+                    path.join(__dirname, `../../public/tmp/gifs/${userId}/temp.gif`)
                   ])
                   rmGif.stdout.on('data', dta => {
                     console.log(`stdout: ${dta}`)
@@ -123,9 +161,7 @@ router.post('/', upload, (req, res, next) => {
         })
       }
     })
-    //res.status(200).send()
   } catch (err) {
-    console.log('ERROR: ', err.message)
     next(err)
   }
 })

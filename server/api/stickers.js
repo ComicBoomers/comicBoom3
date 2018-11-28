@@ -6,7 +6,6 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const stickers = await Sticker.findAll()
-    console.log(stickers)
     res.json(stickers)
   } catch (err) {
     next(err)
