@@ -10,20 +10,20 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-
+<div className='pageBorder'>
     <div id='loginSignUp'>
       <form onSubmit={handleSubmit} name={name} className='loginSignup-Form'>
         <div/><div/><div>
           <label htmlFor="email">
            <div className ='text'> <small>Email</small></div>
           </label>
-          <input name="email" type="text" />
+          <input name="email" type="text" placeholder='Your Email'/>
         </div>
         <div>
           <label htmlFor="password">
             <small>Password</small>
           </label>
-          <input name="password" type="password" />
+          <input name="password" type="password" placeholder='Your Password'/>
         </div>
         <span>
           <button type="submit">{displayName}</button> or {''}
@@ -34,7 +34,7 @@ const AuthForm = props => {
       </form>
       <div/>
     </div>
-
+</div>
   )
 }
 
