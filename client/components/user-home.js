@@ -18,43 +18,50 @@ class UserHome extends Component {
     const email = this.props.user.email
 
     return (
-
-      <div id='myPage'>
-        <h3 className='pageText'>Welcome, {email}</h3>
+      <div id="myPage">
+        <h3 className="pageText">Welcome, {email}</h3>
 
         {/* <embed src={batman}/> */}
-          {
-            this.props.user.pages ?
-
-            <div >
-              <div>
-                <Link to='/uploadVideo'>
-                <button type ='button' >
-                <img src ='https://banner2.kisspng.com/20180701/fss/kisspng-computer-icons-medicine-health-care-plus-button-5b38d58623cf91.1353788815304513341467.jpg' className ='addNewButton' /></button>
-                </Link>
-                <h2 className='pageText'>My Comics</h2>
-              </div>
-
-              <div className='box-content'>
-                {
-                  this.props.user.pages.map(photo =>
-                    {
-                    return (
-                      <div key = {photo.id}>
-                        <Link to={{pathname: `/comicPage/${photo.id}`, state: photo.location}}>
-                        <img src={photo.location} className='homePageImage'/>
-                        </Link>
-                      </div>)
-                    })
-                }
-              </div>
+        {this.props.user.pages ? (
+          <div>
+            <div>
+              <p className="instructions">
+                Click the button below to take a video and turn it into an
+                animated comicBOOM.
+              </p>
             </div>
-            :
-            <Loading />
-          }
+            <div>
+              <Link to="/uploadVideo">
+                <button type="button" className="boomify">
+                  🎥 ADD A COMIC BOOM 🎥
+                </button>
+              </Link>
+              <h2 className="pageText">My Comics</h2>
+            </div>
+
+            <div className="box-content">
+              {this.props.user.pages.map(photo => {
+                return (
+                  <div key={photo.id}>
+                    <Link
+                      to={{
+                        pathname: `/comicPage/${photo.id}`,
+                        state: photo.location
+                      }}
+                    >
+                      <img src={photo.location} className="homePageImage" />
+                    </Link>
+                  </div>
+                )
+              })}
+            </div>
           </div>
+        ) : (
+          <Loading />
+        )}
+      </div>
     )
-    }
+  }
 }
 
 /**

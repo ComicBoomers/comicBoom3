@@ -10,31 +10,36 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-
-    <div id='loginSignUp'>
-      <form onSubmit={handleSubmit} name={name} className='loginSignup-Form'>
-        <div/><div/><div>
+    <div id="loginSignUp">
+      <form onSubmit={handleSubmit} name={name} className="loginSignup-Form">
+        <div />
+        <div />
+        <div>
           <label htmlFor="email">
-           <div className ='text'> <small>Email</small></div>
+            <div className="boomify"> Email</div>
           </label>
           <input name="email" type="text" />
         </div>
         <div>
           <label htmlFor="password">
-            <small>Password</small>
+            <div className="boomify">Password</div>
           </label>
           <input name="password" type="password" />
         </div>
         <span>
           <button type="submit">{displayName}</button> or {''}
-
-        {error && error.response && <div> {error.response.data} </div>}
-        <a href="/auth/google"><button type='button'> {displayName} with <img src='https://addons.thunderbird.net/user-media/addon_icons/12/12061-64.png?modified=1353884979'/></button></a>
+          {error && error.response && <div> {error.response.data} </div>}
+          <a href="/auth/google">
+            <button type="button">
+              {' '}
+              {displayName} with{' '}
+              <img src="https://addons.thunderbird.net/user-media/addon_icons/12/12061-64.png?modified=1353884979" />
+            </button>
+          </a>
         </span>
       </form>
-      <div/>
+      <div />
     </div>
-
   )
 }
 
