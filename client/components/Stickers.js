@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
-import {dropSticker, allStickers} from '../store'
+import {dropSticker, allStickers, setClone} from '../store'
 
 class Stickers extends React.Component {
   constructor() {
@@ -14,12 +14,18 @@ class Stickers extends React.Component {
   }
 
   dragStart(e) {
-
     e.dataTransfer.effectAllowed = "copy";
-
     const stickerId = e.target.id
-    console.log('stickerId in Drag Start:', stickerId)
     this.props.identifyStickerToDrop(stickerId)
+    // if inside dropzone? false : true
+    if(document.getElementById('myPage').length > 0) {
+      const boolean = false
+      this.props.toCloneOrNotToClone(boolean)
+    } else {
+      const boolean = true
+      this.props.toCloneOrNotToClone(boolean)
+    }
+
   }
 
   render() {
@@ -68,6 +74,9 @@ const mapDispatchToProps = dispatch => {
     },
     initiateStickers() {
       dispatch(allStickers())
+    },
+    toCloneOrNotToClone(boolean) {
+      dispatch(setClone(boolean))
     }
   }
 }

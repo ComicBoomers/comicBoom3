@@ -35,17 +35,29 @@ class PageCreate extends React.Component {
     console.log('drop event page x,y:', mouseX, mouseY)
 
     //Placing sticker at mouse drop coordinates
-    const itm = document.getElementById(id)
+    //if sticker is picked up again inside the drop zone skip clone step and just edit and move original itm...
+    const cloneBoolean = this.props.clone
 
-    const stickerPlacement = (X, Y) => {
-      const clone = itm.cloneNode(true)
-      clone.style.position = 'absolute'
-      clone.style.top = `${Y}px`
-      clone.style.left = `${X}px`
-      return clone
-    }
-
-    e.target.append(stickerPlacement(mouseX, mouseY))
+      if (cloneBoolean) {
+          const itm = document.getElementById(id)
+          const stickerPlacement = (X, Y) => {
+            const clone = itm.cloneNode(true)
+            clone.style.position = 'absolute'
+            clone.style.top = `${Y}px`
+            clone.style.left = `${X}px`
+              return clone
+          }
+          e.target.append(stickerPlacement(mouseX, mouseY))
+      } else {
+        const stickerPlacement = (X, Y) => {
+          const itm = document.getElementById(id)
+          itm.style.position = 'absolute'
+          itm.style.top = `${Y}px`
+          itm.style.left = `${X}px`
+            return itm
+        }
+        e.target.append(stickerPlacement(mouseX, mouseY))
+      }
 
     //drop-zone coords (top, left corner)
     const elem = document.getElementById('newPage')
@@ -119,7 +131,8 @@ const mapStateToProps = state => {
   return {
     stickerId: state.sticker.stickerId,
     myPage: state.page.singlePage,
-    user: state.user
+    user: state.user,
+    clone: state.sticker.clone
   }
 }
 

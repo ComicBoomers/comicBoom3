@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GOT_STICKERS = 'GOT_STICKERS'
 const SET_STICKER = 'SET_STICKER'
+const SET_CLONE = 'SET_CLONE'
 // const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -13,7 +14,8 @@ const SET_STICKER = 'SET_STICKER'
  */
 const initialState = {
   allStickers: [],
-  stickerId: ''
+  stickerId: '',
+  clone: null
 }
 
 /**
@@ -21,6 +23,7 @@ const initialState = {
  */
 const gotStickers = allStickers => ({type: GOT_STICKERS, allStickers})
 const setSticker = sticker => ({type: SET_STICKER, sticker})
+export const setClone = boolean => ({type: SET_CLONE, boolean})
 // const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -52,6 +55,8 @@ export default function(state = initialState, action) {
       return {...state, allStickers: action.allStickers}
     case SET_STICKER:
       return {...state, stickerId: action.sticker}
+    case SET_CLONE:
+      return {...state, clone: action.boolean}
 
     default:
       return state
