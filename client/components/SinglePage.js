@@ -51,39 +51,42 @@ class SinglePage extends React.Component {
     return (
       <div id="myPage">
         {this.props.myPage ? (
-          <div className="myPage">
-            <div />
+          <div>
+            <div className="myPage">
+              <img src={this.props.myPage.location} />
+            </div>
             {/* <h1 className=''>Comic Title</h1> */}
             {/* <button type="button">
               <Link to="/createComic">
-                Edit Comic
+              Edit Comic
               </Link>
             </button> */}
-            {this.state.areYouSure ? (
-              <button type="button" onClick={this.handleDelete}>
-                Confirm Delete
-              </button>
-            ) : (
-              <button type="button" onClick={this.triggerConfirm}>
-                Delete Comic
-              </button>
-            )}
-            <img src={this.props.myPage.location} />
-            <h3 className="pageText">Share It!</h3>
-            <div className="shareButton">
-              <FacebookShareButton url={shareUrl}>
+            <div>
+              {this.state.areYouSure ? (
+                <button type="button" onClick={this.handleDelete} className='delete' >
+                  Confirm Delete
+                </button>
+              ) : (
+                <button type="button" onClick={this.triggerConfirm} className='delete' >
+                  Delete Comic
+                </button>
+              )}
+            </div>
+            <h3 className='pageText'>Share It!</h3>
+            <div className='shareButton'>
+              <FacebookShareButton url={shareUrl} >
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
-              <TwitterShareButton url={shareUrl}>
+              <TwitterShareButton url={shareUrl} >
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
-              <WhatsappShareButton url={shareUrl}>
+              <WhatsappShareButton url={shareUrl} >
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
-              <TumblrShareButton url={shareUrl}>
+              <TumblrShareButton url={shareUrl} >
                 <TumblrIcon size={32} round />
               </TumblrShareButton>
-              <EmailShareButton url={shareUrl}>
+              <EmailShareButton url={shareUrl} >
                 <EmailIcon size={32} round />
               </EmailShareButton>
             </div>
