@@ -66,8 +66,7 @@ router.post('/', upload, (req, res, next) => {
 // $ curl -X PUT -H "Content-Type: application/json" -d '{"stickerId":"0","stickerX":"60", "stickerY":"60"}' http://localhost:8080/api/upload
 router.put('/', async (req, res, next) => {
   try {
-    // const userId = req.user.id
-    const userId = 1 // comment out above line to test curl script
+    const userId = req.user.id
     const gifId = uuidv4()
     const vidPath = `public/tmp/uploads/${userId}`
     const gifPath = `public/tmp/gifs/${userId}`

@@ -196,8 +196,12 @@ form div {
   font-family: 'Kalam';
   font-size: 22px;
   color: yellow;
-  padding-left: 45%;
 }
+.singlecomic {
+  width: 100%;
+  max-width: 375px;
+}
+
 .instructions {
   font-family: 'Kalam';
   font-size: 18px;
@@ -419,16 +423,8 @@ form {
   padding-left: 45px;
 }
 
-.shareButton{
+.shareButton {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
 }
-
-.delete {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  border-radius: 3px;
-}
-
