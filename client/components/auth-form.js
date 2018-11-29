@@ -11,9 +11,7 @@ const AuthForm = props => {
 
   return (
     <div id="loginSignUp">
-      <form onSubmit={handleSubmit} name={name} className="loginSignup-Form">
-        <div />
-        <div />
+      <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">
             <div className="boomify"> Email</div>
@@ -27,10 +25,13 @@ const AuthForm = props => {
           <input name="password" type="password" />
         </div>
         <span>
-          <button type="submit">{displayName}</button> or {''}
+          <button type="submit" className="boomify">
+            {displayName}
+          </button>{' '}
+          or {''}
           {error && error.response && <div> {error.response.data} </div>}
           <a href="/auth/google">
-            <button type="button">
+            <button type="button" className="boomify">
               {' '}
               {displayName} with{' '}
               <img src="https://addons.thunderbird.net/user-media/addon_icons/12/12061-64.png?modified=1353884979" />

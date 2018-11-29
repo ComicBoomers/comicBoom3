@@ -27,7 +27,7 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <div>
+      <div className="all">
         <Navbar />
         {!isLoggedIn && (
           <Switch>
