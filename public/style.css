@@ -50,7 +50,8 @@ form div {
 }
 
 .homePageImage {
-  width: 150px;
+  width: 100%;
+  max-width: 375px;
 }
 
 .stickers {
@@ -59,12 +60,7 @@ form div {
   position: fixed;
   /* border-style: solid;
   border-width: 5px;
-<<<<<<< HEAD
-  border-color: grey;
-  border-radius: 25px;
-=======
   border-color: grey; */
->>>>>>> 2d0b1bf8c5a32a4c1903a3633c37cbceccf53d4b
   cursor: pointer;
 }
 .sticker-list {
@@ -83,7 +79,9 @@ form div {
 
 .sidebar {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
+  position: fixed;
 }
 
 .comicStrip {
@@ -158,11 +156,12 @@ form div {
   justify-content: center;
   background-color: black;
   border-color: blue;
-  border-bottom-style: dotted;
+  /* border-bottom-style: dotted; */
   border-left-style: dotted;
   border-right-style: dotted;
   border-width: 7px;
-  height: 100vh;
+  height: 100%;
+  padding-left: 15px;
 }
 
 .myPage {
@@ -178,14 +177,17 @@ form div {
 }
 
 .box-content {
-  grid-area: box-content;
-  align-items: start;
+  /* grid-area: box-content; */
+  display: flex;
+  flex-direction: column-reverse;
+  /* align-items: start;
   align-content: start;
   display: grid;
   grid-gap: 10px;
   padding: 10px;
-  grid-template-columns: repeat(3, auto);
-  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(1, auto); */
+  /* grid-template-rows: repeat(3, auto); */
+  padding-bottom: 50px;
 }
 
 .pageDiv {
@@ -199,8 +201,12 @@ form div {
   font-family: 'Kalam';
   font-size: 22px;
   color: yellow;
-  padding-left: 45%;
 }
+.singlecomic {
+  width: 100%;
+  max-width: 375px;
+}
+
 .instructions {
   font-family: 'Kalam';
   font-size: 18px;
@@ -209,15 +215,20 @@ form div {
 
 input,
 textarea {
-  background-color: yellow;
+  background-color: gold;
   border-radius: 3px;
   margin-bottom: 5px;
+}
+
+.onegifonly {
+  background-repeat: no-repeat;
+  background-color: black;
 }
 
 #newPage {
   height: 253px;
   width: 375px;
-  background-color: blueviolet;
+  background-color: black;
 }
 /* Loading Animation: SCSS in this section... */
 .loader {
@@ -417,16 +428,8 @@ form {
   padding-left: 45px;
 }
 
-.shareButton{
+.shareButton {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
 }
-
-.delete {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  border-radius: 3px;
-}
-

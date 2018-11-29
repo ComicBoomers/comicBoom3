@@ -12,8 +12,8 @@ import {
   TwitterIcon,
   WhatsappIcon,
   TumblrIcon,
-  EmailIcon,
-} from 'react-share';
+  EmailIcon
+} from 'react-share'
 import axios from 'axios'
 import history from '../history'
 
@@ -52,8 +52,8 @@ class SinglePage extends React.Component {
       <div id="myPage">
         {this.props.myPage ? (
           <div>
-            <div className="myPage">
-              <img src={this.props.myPage.location} />
+            <div>
+              <img src={this.props.myPage.location} className="singlecomic" />
             </div>
             {/* <h1 className=''>Comic Title</h1> */}
             {/* <button type="button">
@@ -63,30 +63,38 @@ class SinglePage extends React.Component {
             </button> */}
             <div>
               {this.state.areYouSure ? (
-                <button type="button" onClick={this.handleDelete} className='delete' >
+                <button
+                  type="button"
+                  onClick={this.handleDelete}
+                  className="boomify"
+                >
                   Confirm Delete
                 </button>
               ) : (
-                <button type="button" onClick={this.triggerConfirm} className='delete' >
+                <button
+                  type="button"
+                  onClick={this.triggerConfirm}
+                  className="boomify"
+                >
                   Delete Comic
                 </button>
               )}
-            </div>     
-            <h3 className='pageText'>Share It!</h3>
-            <div className='shareButton'>
-              <FacebookShareButton url={shareUrl} >
+            </div>
+            <h3 className="pageText">Share It!</h3>
+            <div className="shareButton">
+              <FacebookShareButton url={shareUrl}>
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
-              <TwitterShareButton url={shareUrl} >
+              <TwitterShareButton url={shareUrl}>
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
-              <WhatsappShareButton url={shareUrl} >
+              <WhatsappShareButton url={shareUrl}>
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
-              <TumblrShareButton url={shareUrl} >
+              <TumblrShareButton url={shareUrl}>
                 <TumblrIcon size={32} round />
               </TumblrShareButton>
-              <EmailShareButton url={shareUrl} >
+              <EmailShareButton url={shareUrl}>
                 <EmailIcon size={32} round />
               </EmailShareButton>
             </div>

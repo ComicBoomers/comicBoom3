@@ -43,7 +43,7 @@ router.post('/', upload, (req, res, next) => {
     const options = {
       /* comment out the code below before deployment */
       mode: 'text',
-      pythonPath: '/usr/bin/python',
+      pythonPath: '/usr/local/bin/python',
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
@@ -64,10 +64,9 @@ router.post('/', upload, (req, res, next) => {
 // attach sticker to gif and post to database
 
 // $ curl -X PUT -H "Content-Type: application/json" -d '{"stickerId":"0","stickerX":"60", "stickerY":"60"}' http://localhost:8080/api/upload
-router.put('/', (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
-    // const userId = req.user.id
-    const userId = 1 // comment out above line to test curl script
+    const userId = req.user.id
     const gifId = uuidv4()
     const vidPath = `public/tmp/uploads/${userId}`
     const gifPath = `public/tmp/gifs/${userId}`
@@ -75,7 +74,7 @@ router.put('/', (req, res, next) => {
     const options = {
       /* comment out the code below before deployment */
       mode: 'text',
-      pythonPath: '/usr/bin/python',
+      pythonPath: '/usr/local/bin/python',
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
@@ -132,7 +131,7 @@ router.put('/', (req, res, next) => {
                   const newPage = Page.create({
                     location: downloadURL,
                     userId
-                  })
+                  }).then(() => res.status(200).send())
                   const rmVid = spawn('rm', [
                     path.join(
                       __dirname,
@@ -162,7 +161,6 @@ router.put('/', (req, res, next) => {
                   })
                   rmGif.on('close', code => {
                     console.log(`child process exited with code ${code}`)
-                    res.status(200).send()
                   })
                 })
             }
