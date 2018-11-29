@@ -172,6 +172,9 @@ form div {
   grid-auto-flow: row;
   grid-gap: 6px;
   grid-auto-flow: column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .box-content {
@@ -206,7 +209,9 @@ form div {
 
 input,
 textarea {
-  background-color: #d1d1d1;
+  background-color: yellow;
+  border-radius: 3px;
+  margin-bottom: 5px;
 }
 
 #newPage {
@@ -411,3 +416,17 @@ form {
   width: 250px;
   padding-left: 45px;
 }
+
+.shareButton{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.delete {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 3px;
+}
+
