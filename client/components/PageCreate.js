@@ -5,6 +5,7 @@ import Stickers from './Stickers'
 import {sticker} from '../store'
 import axios from 'axios'
 import Loading from './Loading'
+import history from '../history'
 
 class PageCreate extends React.Component {
   constructor() {
@@ -13,7 +14,7 @@ class PageCreate extends React.Component {
       stickerId: '0',
       stickerX: null,
       stickerY: null,
-      loading: false
+      loadingStatus: ''
     }
 
     this.allowDrop = this.allowDrop.bind(this)
@@ -32,7 +33,6 @@ class PageCreate extends React.Component {
 
     //Document Relative: (mouse coords on Drop) - rounded to match save coords
     const [mouseX, mouseY] = [Math.round(e.pageX), Math.round(e.pageY)]
-    console.log('drop event page x,y:', mouseX, mouseY)
 
     //Placing sticker at mouse drop coordinates
     const itm = document.getElementById(id)
@@ -58,34 +58,28 @@ class PageCreate extends React.Component {
     this.setState({stickerId: `${inHouseId}`, stickerX: x, stickerY: y})
   }
 
-  // mouseTracker(e) {
-  //   console.log("x:", e.pageX, 'y:', e.pageY)
-  // }
-
   async savePage() {
     // for now will only merge 1 sticker to gif and save gif (gif saved via backend so upon response it will be in the database)
-    this.setState({loading: true})
-    console.log('hit here', this.state)
-    const objToMerge = this.state
-    console.log('state:', objToMerge)
+    this.setState({
+      loadingStatus: 'loading'
+    })
+    const objToMerge = {
+      stickerId: this.state.stickerId,
+      stickerX: this.state.stickerX,
+      stickerY: this.state.stickerY
+    }
     const res = await axios.put('/api/upload', objToMerge)
     if (res) {
-      this.setState({loading: false})
-      this.props.history.push('/')
+      history.push('/')
     }
   }
 
   render() {
     const userId = this.props.user.id
-    console.log('USER ID: ', userId)
     const pagePath = `/tmp/gifs/${userId}/temp.gif`
+    const loading = this.state.loadingStatus
 
-    const loading = this.state.loading
-    //we need the user ID
-    //page is going to be coming from temp/gifs/ not state...how to call that up ?/?
-    //place ${page} where hard coded url is now
-
-    return loading ? (
+    return loading === 'loading' ? (
       <Loading />
     ) : (
       <div id="myPage">

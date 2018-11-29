@@ -23,17 +23,14 @@ export default class AddVideo extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    if (this.state.video.name) {
-      let formData = new FormData()
-      formData.append('video', this.state.video)
-      this.setState({
-        loadingStatus: 'loading'
-      })
-      let loaded = await axios.post('/api/upload', formData)
-      console.log('handle submit loaded in AddVideo', loaded)
-      if (loaded) {
-        history.push('/createComic')
-      }
+    let formData = new FormData()
+    formData.append('video', this.state.video)
+    this.setState({
+      loadingStatus: 'loading'
+    })
+    let loaded = await axios.post('/api/upload', formData)
+    if (loaded) {
+      history.push('/createComic')
     }
   }
 
@@ -58,6 +55,7 @@ export default class AddVideo extends React.Component {
               onChange={this.handleChange}
               color="white"
               className="custom-file-input uploadvideo"
+              required
             />
             <button type="submit" className="boomify">
               BOOMIFY
