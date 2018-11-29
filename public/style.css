@@ -50,7 +50,8 @@ form div {
 }
 
 .homePageImage {
-  width: 150px;
+  width: 100%;
+  max-width: 375px;
 }
 
 .stickers {
@@ -155,11 +156,12 @@ form div {
   justify-content: center;
   background-color: black;
   border-color: blue;
-  border-bottom-style: dotted;
+  /* border-bottom-style: dotted; */
   border-left-style: dotted;
   border-right-style: dotted;
   border-width: 7px;
-  height: 100vh;
+  height: 100%;
+  padding-left: 15px;
 }
 
 .myPage {
@@ -175,14 +177,17 @@ form div {
 }
 
 .box-content {
-  grid-area: box-content;
-  align-items: start;
+  /* grid-area: box-content; */
+  display: flex;
+  flex-direction: column-reverse;
+  /* align-items: start;
   align-content: start;
   display: grid;
   grid-gap: 10px;
   padding: 10px;
-  grid-template-columns: repeat(3, auto);
-  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(1, auto); */
+  /* grid-template-rows: repeat(3, auto); */
+  padding-bottom: 50px;
 }
 
 .pageDiv {
