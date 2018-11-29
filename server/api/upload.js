@@ -43,7 +43,7 @@ router.post('/', upload, (req, res, next) => {
     const options = {
       /* comment out the code below before deployment */
       mode: 'text',
-      pythonPath: '/usr/bin/python',
+      pythonPath: '/usr/local/bin/python',
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
@@ -75,7 +75,7 @@ router.put('/', (req, res, next) => {
     const options = {
       /* comment out the code below before deployment */
       mode: 'text',
-      pythonPath: '/usr/bin/python',
+      pythonPath: '/usr/local/bin/python',
       pythonOptions: ['-u'],
       /* comment out the code above before deployment */
       scriptPath: path.join(__dirname, '/../../python'),
@@ -129,7 +129,7 @@ router.put('/', (req, res, next) => {
                 .then(function(downloadURL) {
                   console.log('File available at', downloadURL)
                   // add URL to User Page model
-                  const newPage = Page.create({
+                  Page.create({
                     location: downloadURL,
                     userId
                   })

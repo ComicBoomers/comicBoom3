@@ -59,12 +59,7 @@ form div {
   position: fixed;
   /* border-style: solid;
   border-width: 5px;
-<<<<<<< HEAD
-  border-color: grey;
-  border-radius: 25px;
-=======
   border-color: grey; */
->>>>>>> 2d0b1bf8c5a32a4c1903a3633c37cbceccf53d4b
   cursor: pointer;
 }
 .sticker-list {
@@ -83,7 +78,9 @@ form div {
 
 .sidebar {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
+  position: fixed;
 }
 
 .comicStrip {
@@ -209,10 +206,15 @@ textarea {
   background-color: #d1d1d1;
 }
 
+.onegifonly {
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
 #newPage {
   height: 253px;
   width: 375px;
-  background-color: blueviolet;
+  background-color: black;
 }
 /* Loading Animation: SCSS in this section... */
 .loader {

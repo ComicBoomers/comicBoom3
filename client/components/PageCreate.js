@@ -53,7 +53,7 @@ class PageCreate extends React.Component {
     const [elemX, elemY] = [coords.left + pageXOffset, coords.top + pageYOffset]
 
     //mouse coords relative to dropzone(gif)
-    const inHouseId = Number(id) + 1
+    const inHouseId = Number(id)
     const [x, y] = [Math.round(mouseX - elemX), Math.round(mouseY - elemY)]
     this.setState({stickerId: `${inHouseId}`, stickerX: x, stickerY: y})
   }
@@ -89,7 +89,12 @@ class PageCreate extends React.Component {
       <Loading />
     ) : (
       <div id="myPage">
-        <span>
+        <div>
+          <h3 className="instructions">
+            Add a Sticker to your comicBOOM! Click 'save' to continue
+          </h3>
+        </div>
+        <div>
           <Stickers className="sidebar" />
           {/* <img src={pageURL} /> */}
           <div
@@ -97,16 +102,16 @@ class PageCreate extends React.Component {
               backgroundImage: `url(${pagePath})`
             }}
             id="newPage"
-            className="dropzone"
+            className="dropzone onegifonly"
             dropzone="copy"
             onDragOver={this.allowDrop}
             onDrop={this.drop}
             // onMouseOver={this.mouseTracker}
           />
-        </span>
+        </div>
 
         <div>
-          <button type="button" onClick={this.savePage}>
+          <button className="boomify" type="button" onClick={this.savePage}>
             SAVE
           </button>
         </div>
