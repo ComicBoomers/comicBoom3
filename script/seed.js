@@ -34,31 +34,56 @@ const stickers = [
   }
 ]
 
-const seed = () =>
-  Promise.all(users.map(elem => User.create(elem))).then(() =>
-    Promise.all(stickers.map(elem => Sticker.create(elem)))
-  )
+// const seed = () =>
+//   Promise.all(users.map(elem => User.create(elem))).then(() =>
+//     Promise.all(stickers.map(elem => Sticker.create(elem)))
+//   )
 
-const main = () => {
-  console.log('Syncing the db...')
-  db
-    .sync({force: true})
-    .then(() => {
-      console.log(green('Seeding the database...'))
-      return seed()
-    })
-    .catch(err => {
-      console.error(red('Oh noes! Something went wrong!'))
-      console.error(err)
-    })
-    .then(() => {
-      db.close()
-      console.log(green('Seeded Successfully!!'))
-      return null
-    })
+// const main = () => {
+//   console.log('Syncing the db...')
+//   db
+//     .sync({force: true})
+//     .then(() => {
+//       console.log(green('Seeding the database...'))
+//       return seed()
+//     })
+//     .catch(err => {
+//       console.error(red('Oh noes! Something went wrong!'))
+//       console.error(err)
+//     })
+//     .then(() => {
+//       db.close()
+//       console.log(green('Seeded Successfully!!'))
+//       return null
+//     })
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${stickers.length} stickers`)
+//   console.log(`seeded ${users.length} users`)
+//   console.log(`seeded ${stickers.length} stickers`)
+// }
+
+async function seed() {
+  await db.sync({force: true})
+  await Promise.all(users.map(elem => User.create(elem)))
+  await Promise.all(stickers.map(elem => Sticker.create(elem)))
+  console.log('seeded successfully')
 }
-main()
+
+async function main() {
+  console.log('seeding')
+  try {
+    await seed()
+  } catch (err) {
+    console.log('Err:', err)
+    process.exitCode = 1
+  } finally {
+    console.log('closing db connection')
+    await db.close()
+    console.log('db connection closed')
+  }
+}
+
+if (module === require.main) {
+  main()
+}
+
 module.exports = seed

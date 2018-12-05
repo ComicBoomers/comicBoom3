@@ -3,7 +3,7 @@ import axios from 'axios'
 import Loading from './Loading'
 import history from '../history'
 
-export default class AddVideo extends React.Component {
+export class AddVideo extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -68,3 +68,5 @@ export default class AddVideo extends React.Component {
     )
   }
 }
+
+export default AddVideo

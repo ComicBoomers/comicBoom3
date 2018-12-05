@@ -4,12 +4,11 @@ import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {me} from '../store'
 import Loading from './Loading'
-// import batman from '../images/batman_theme_x.wav'
 
 /**
  * COMPONENT
  */
-class UserHome extends Component {
+export class UserHome extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
@@ -20,8 +19,6 @@ class UserHome extends Component {
     return (
       <div id="myPage">
         <h3 className="pageText">Welcome, {email}</h3>
-
-        {/* <embed src={batman}/> */}
         {this.props.user.pages ? (
           <div>
             <div>
