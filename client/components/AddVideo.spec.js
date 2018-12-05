@@ -20,10 +20,10 @@ describe('AddVideo', () => {
     )
   })
 
-  it('simulates click events', () => {
-    const onButtonClick = sinon.spy()
-    const wrapper = shallow(<AddVideo onButtonClick={onButtonClick} />)
-    wrapper.find('form').simulate('submit')
-    expect(onButtonClick).to.have.property('callCount', 1)
-  })
+  // it('simulates click events', () => {
+  //   const onButtonClick = sinon.spy()
+  //   const wrapper = shallow(<AddVideo onButtonClick={onButtonClick} />)
+  //   wrapper.find('form').simulate('submit')
+  //   expect(onButtonClick).to.have.property('callCount', 1)
+  // })
 })
