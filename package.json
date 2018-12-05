@@ -20,7 +20,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+    "test": "NODE_ENV='test' mocha \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -38,10 +38,13 @@
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
     "chalk": "^2.4.1",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
     "dateformat": "^3.0.3",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
     "express": "^4.16.3",
     "express-session": "^1.15.1",
     "firebase": "^5.5.8",
@@ -70,8 +73,10 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
+    "sinon": "^7.1.1",
     "socket.io": "^2.1.1",
     "stripe": "^6.13.0",
+    "supertest": "^3.3.0",
     "uuid": "^3.3.2",
     "xhr2": "^0.1.4"
   },

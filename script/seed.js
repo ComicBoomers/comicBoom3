@@ -34,10 +34,11 @@ const stickers = [
   }
 ]
 
-const seed = () =>
-  Promise.all(users.map(elem => User.create(elem))).then(() =>
-    Promise.all(stickers.map(elem => Sticker.create(elem)))
-  )
+const seed = () => Promise.all(users.map(elem => User.create(elem)))
+
+// .then(() =>
+//   Promise.all(stickers.map(elem => Sticker.create(elem)))
+// )
 
 const main = () => {
   console.log('Syncing the db...')
@@ -51,11 +52,11 @@ const main = () => {
       console.error(red('Oh noes! Something went wrong!'))
       console.error(err)
     })
-    .then(() => {
-      db.close()
-      console.log(green('Seeded Successfully!!'))
-      return null
-    })
+  // .then(() => {
+  //   db.close()
+  //   console.log(green('Seeded Successfully!!'))
+  //   return null
+  // })
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${stickers.length} stickers`)
