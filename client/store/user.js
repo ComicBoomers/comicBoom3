@@ -26,7 +26,7 @@ export const me = () => async dispatch => {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
-    console.error(err)
+    // console.error(err)
   }
 }
 
