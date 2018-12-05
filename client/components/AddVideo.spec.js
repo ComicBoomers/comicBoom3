@@ -20,10 +20,9 @@ describe('AddVideo', () => {
     )
   })
 
-  it('simulates click events', () => {
-    const onButtonClick = sinon.spy()
-    const wrapper = shallow(<AddVideo onButtonClick={onButtonClick} />)
-    wrapper.find('button').simulate('click')
-    expect(onButtonClick).to.have.property('callCount', 1)
+  it('correct classes applied to input and button', () => {
+    const wrapper = shallow(<AddVideo />)
+    expect(wrapper.find('.boomify').type()).to.equal('button')
+    expect(wrapper.find('.uploadvideo').type()).to.equal('input')
   })
 })
