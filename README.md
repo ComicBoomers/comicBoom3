@@ -4,12 +4,7 @@ _Life in Four Panels: Become the Hero of Your Own Story_
 
 `comicBOOM` lets you tell your story the best way possible: in four panels. Take a video with this Web App to share life -- in comic book form. Animated gifs capture moments from uploaded videos for users to share. Developed using React, Redux, Express, Nodejs, Python, and deployed on Heroku with Firebase for storage, ComicBOOM enables users to upload videos to the server where Python creates a four-panel animated gif.
 
-## Team Members
-
-* Hystee Weldon
-* Jinyan Shen
-* Lauren E Kirincich
-* Samantha Francis
+Originally developed for Fullstack Academy Grace Hopper Program Capstone Project by Hystee Weldon, Jinyan Shen, Lauren E Kirincich, and Samantha Francis
 
 ### Tech Stack
 
